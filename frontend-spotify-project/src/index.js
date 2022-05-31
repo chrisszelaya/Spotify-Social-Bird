@@ -9,8 +9,8 @@ import LoginPage from './Components/LoginPage';
 import ForumnPage from './Components/ForumnPage';
 import InboxPage from './Components/InboxPage';
 import LikedSongs from './Components/LikedSongs';
-import TopArtists from './Components/TopArtists';
-import TopSongs from './Components/TopSongs';
+import TopArtistsPage from './Components/TopArtistsPage';
+import TopSongsPage from './Components/TopSongsPage';
 import UserProfile from './Components/UserProfile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -23,8 +23,8 @@ root.render(
       <Route path = 'inboxpage' element={<InboxPage/>}/>
       <Route path='likedsongs' element={<LikedSongs/>}/>
       <Route path='loginpage' element={<LoginPage/>}/>
-      <Route path='topartists' element={<TopArtists/>}/>
-      <Route path='topsongs' element={<TopSongs/>}/>
+      <Route path='topartists' element={<TopArtistsPage/>}/>
+      <Route path='topsongs' element={<TopSongsPage/>}/>
       <Route path='userprofile' element={<UserProfile/>}/>
     </Routes>
   </BrowserRouter>
