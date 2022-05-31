@@ -1,7 +1,6 @@
 // import logo from './logo.svg';
 import {Link} from "react-router-dom";
 import './App.css';
-import UserProfile from "./UserProfile.js"
 
 function App() {
   return (
