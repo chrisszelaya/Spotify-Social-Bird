@@ -4,21 +4,19 @@ import axios from "axios"
 
 function UserProfile() {
     //state
-    const [userInfo, setUserInfo] = useState();
-    const [refresh, setRefresh] = useState(false);   
+    const [userInfo, setUserInfo] = useState(); 
 
     const getUserInfo = (userID) => {
-        console.log("updating info...")
         fetch("http://localhost:9000/discoverpg/allUserInfo/" + userID)
         .then((res) => res.json())
-        .then((text) => {setUserInfo(text); setRefresh(false); console.log(text)})
+        .then((text) => {setUserInfo(text)})
     }
 
     useEffect(() => {
         getUserInfo("j48981HNmaNpshoSnIZz");
       }, [])
 
-    if(userInfo && !refresh) {
+    if(userInfo) {
     const curUserID = "j48981HNmaNpshoSnIZz"; 
     const pageID = "j48981HNmaNpshoSnIZz";
     const username = userInfo.username; 
@@ -31,12 +29,12 @@ function UserProfile() {
 
     const addSongToDisplayed = (song) => {
         axios.put("http://localhost:9000/discoverpg/addSong/" + pageID + "/" + song)
-        .then((res) => {console.log(res.data); setRefresh(true); getUserInfo(pageID); })
+        .then((res) => {getUserInfo(pageID); })
     }
 
     const removeSongFromDisplayed = (song) => {
         axios.put("http://localhost:9000/discoverpg/removeSong/" + pageID + "/" + song)
-        .then((res) => {console.log(res.data); setRefresh(true); getUserInfo(pageID); })
+        .then((res) => {getUserInfo(pageID); })
     }
 
     if(myPage) {
@@ -51,7 +49,8 @@ function UserProfile() {
             <div style={{alignItems: "center", textAlign: "center"}}>
                 <h1 style={{textAlign: "left", margin: 25, marginLeft: 60, fontSize: 46}}>{username}'s Profile (yours)</h1>
                 <h2>Displayed Songs</h2>
-                {displayedTopSongsIDs.map((id) => <SongCard id={id} removeSong={removeSongFromDisplayed}/>)}
+                <SongCard id={displayedTopSongsIDs[0]} removeSong={removeSongFromDisplayed} feature={true}/>
+                {displayedTopSongsIDs.slice(1, displayedTopSongsIDs.length).map((id) => <SongCard id={id} removeSong={removeSongFromDisplayed} feature={false}/>)}
                 <h4 style={{textAlign: "left"}}>Add a new song to display: </h4>
                 <AddNewSong topSongsNotInDisplayed={topSongsNotInDisplayed} addSongToDisplayed={addSongToDisplayed}/>
                 <h2>Displayed Artists</h2>
@@ -69,10 +68,11 @@ function UserProfile() {
     }
     else {
         return(
-            <div>
+            <div style={{alignItems: "center", textAlign: "center"}}>
                 <h1 style={{textAlign: "center", margin: 25, marginLeft: 60, fontSize: 46}}>{username}'s Profile</h1>
                 <h2>Displayed Songs</h2>
-                {displayedTopSongsIDs.map((id) => <iframe style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + id + "?utm_source=generator"} width="95%" height="80" frameBorder="0" allowFullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>)}
+                <iframe style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + displayedTopSongsIDs[0] + "?utm_source=generator"} width="95%" height="380" frameBorder="0" allowFullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                {displayedTopSongsIDs.slice(1, displayedTopSongsIDs.length).map((id) => <iframe style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + id + "?utm_source=generator"} width="95%" height="80" frameBorder="0" allowFullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>)}
                 <h2>Displayed Artists</h2>
                 {displayedTopArtistsIDs.map((id) => <ArtistCard id={id}/>)}
             </div>
@@ -83,12 +83,22 @@ function UserProfile() {
 
 class SongCard extends React.Component {
     render() {
-        return(
-            <div style={{ alignItems: "center", margin: 15, borderStyle: "dotted", borderWidth: 1}}>
-                <iframe key={this.props.id} style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + this.props.id + "?utm_source=generator"} width="95%" height="80" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                <Button style={{margin: 15}} variant="outlined" onClick={() => {this.props.removeSong(this.props.id)}}>Remove from Displayed Songs</Button>
-            </div>
-        );
+        if(this.props.feature) {
+            return(
+                <div style={{ alignItems: "center", margin: 15, borderStyle: "dotted", borderWidth: 1}}>
+                    <iframe key={this.props.id} style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + this.props.id + "?utm_source=generator"} width="95%" height="380" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    <Button style={{margin: 15}} variant="outlined" onClick={() => {this.props.removeSong(this.props.id)}}>Remove from Displayed Songs</Button>
+                </div>
+            );
+        }
+        else {
+            return(
+                <div style={{ alignItems: "center", margin: 15, borderStyle: "dotted", borderWidth: 1}}>
+                    <iframe key={this.props.id} style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + this.props.id + "?utm_source=generator"} width="95%" height="80" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    <Button style={{margin: 15}} variant="outlined" onClick={() => {this.props.removeSong(this.props.id)}}>Remove from Displayed Songs</Button>
+                </div>
+            );
+        }
     }
 }
 
