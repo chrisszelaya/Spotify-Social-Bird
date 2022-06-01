@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@mui/material';
+import { IconButton, Paper, TextField, Typography,Grid,Card,CardMedia,CardContent } from '@mui/material';
 import { Box } from '@mui/system';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -48,4 +48,4 @@ function TopArtist(props) {
             </Box>          
         </Paper>
 */
-export default TopArtist
+export default TopArtist;

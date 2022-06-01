@@ -4,7 +4,7 @@ import TopArtist from './TopArtist';
 
 function TopArtistsList(props) {
     const {topartists} = props;
-    //const {user} = props;
+    const {user} = props;
 
     return (
         <div>
@@ -14,4 +14,4 @@ function TopArtistsList(props) {
     )
 }
 
-export default TopArtistsList
+export default TopArtistsList;

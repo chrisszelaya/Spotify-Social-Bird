@@ -7,6 +7,8 @@ function TopSongsList(props) {
 
     return (
         <div>
+//          displayedSongs && displayedSongs.map((sng) => 
+//             <TopSong key={sng.doc_id} sng={sng}/>)} 
         {topsongs && topsongs.map((sng) => 
             <TopSong key={sng.doc_id} sng={sng}/>)}
         </div>
