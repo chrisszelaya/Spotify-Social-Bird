@@ -1,5 +1,9 @@
-import React,{useState,useEffect} from 'react';
-function TopSongsPage(){
+import { Button, Typography, Box } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import TopSongsList from './TopSongsList';
+
+function TopSongsPage(props){
+    const {user, logout} = props;
     const [displayedSongs, setDisplayedSongs] = useState([]);
 
 
@@ -25,8 +29,8 @@ function TopSongsPage(){
             <Box sx={{width:'15vh'}}/>
             <Typography variant='h6'>Currently logged in as {user}</Typography>
             <Button onClick={logout} variant='contained'>Log Out</Button>
-        
-        </div>
+       </div>
+
     );
 
 

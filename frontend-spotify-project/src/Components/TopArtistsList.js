@@ -1,4 +1,6 @@
 import React from 'react'
+import TopArtist from './TopArtist';
+
 
 function TopArtistsList(props) {
     const {topartists} = props;
@@ -6,8 +8,8 @@ function TopArtistsList(props) {
 
     return (
         <div>
-        {displayedArtists && displayedArtists.map((sng) => 
-            <TopSong key={sng.doc_id} sng={sng}/>)}
+        {topartists && topartists.map((sng) => 
+            <TopArtist key={sng.doc_id} sng={sng}/>)}
         </div>
     )
 }

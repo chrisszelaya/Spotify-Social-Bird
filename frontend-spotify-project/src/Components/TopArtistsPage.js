@@ -1,5 +1,10 @@
-import React,{useState} from "react";
-function TopArtistsPage(){
+import { Button, Typography, Box } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import TopArtistsList from './TopArtistsList';
+
+
+function TopArtistsPage(props){
+    const {user, logout} = props;
     const [displayedArtists, setDisplayedArtists] = useState([]);
 
 
