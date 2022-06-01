@@ -4,10 +4,9 @@ const db = require("../firebase")
 const {getDocs, collection, addDoc, deleteDoc, doc, updateDoc} = require("firebase/firestore")
 
 router.get("/allUserInfo", async (req, res, next) => {
-  console.log(req.query)
   const userInfo = []
   const docs = await getDocs(collection(db, "users"))
-  docs.forEach((doc) => userInfo.push({id: doc.id, ...doc.data()}))
+  docs.forEach((doc) => userInfo.push({id: doc.id,...doc.data()}))
   res.json({result:userInfo})
   // res.send(,result);
 })

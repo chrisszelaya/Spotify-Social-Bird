@@ -6,8 +6,8 @@ function TopSongsList(props) {
 
     return (
         <div>
-        {displayedSongs && displayedSongs.map((sng) => 
-            <TopSong key={sng.doc_id} sng={sng}/>)}
+         displayedSongs && displayedSongs.map((sng) => 
+            <TopSong key={sng.doc_id} sng={sng}/>)} 
         </div>
     )
 }
