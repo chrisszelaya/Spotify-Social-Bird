@@ -7,55 +7,13 @@ import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 
 
-const LogIn=()=>{
-    const [email,setEmail]= useState('');
-    const [password,setPassword]= useState('');
-    const [user,setUser]= useState({});
-
-    onAuthStateChanged(auth,(currentUser)=>{
-        setUser(currentUser);
-    
-        
-    })
-    
-    const register= async(e)=>{
-        e.preventDefault();
-        try{
-
-            const user = createUserWithEmailAndPassword(auth,email,password);
-            console.log(user);
-
-        }catch(error){
-            alert(error.message)
-        }
-
-    }
-
-    const login= async(e)=>{
-        e.preventDefault();
-        try{
-
-            const user = signInWithEmailAndPassword(auth,email,password);
-            console.log(user);
-
-        }catch(error){
-            alert(error.message)
-        }
-
-    }
-
-    const logout= async (e)=>{
-        e.preventDefault();
-        await signOut(auth);
-
-
-    }
-
+const SignUp=()=>{
     return (
         <nav className='Spotify'>
-            <div className='Title'>Spotify <button onClick={logout} className="logout">Log out</button>
-            </div>
+        <header></header>
         <div className='login-form'>
+            <h4 className='userLog'>User Logged In</h4>
+            {user?.email}
             <h1>Log In</h1>
                 <div className='form-group'>
                 <input type="text" placeholder="Enter Email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
@@ -66,17 +24,12 @@ const LogIn=()=>{
                 <span className='input-icon'><i className="fa fa-envelope"><LockIcon/></i></span>
                 </div>
                 <button className='login-btn'>Sign In</button>
-                <a className='signup' href="#">Don't have an account ?</a>
+                <Link to="/SignUp" className='signup' href="#">Don't have an account ?</Link>
                 <button onClick={register} className='login-btn'>Create an Account</button>
+                //<button onClick={logout} className="login-btn">Log out</button>
         </div>
         </nav>
     )
 
-
-
+    
 }
-
-
-
-
-export default LogIn
