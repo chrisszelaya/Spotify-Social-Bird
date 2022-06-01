@@ -12,6 +12,7 @@ import LikedSongs from './Components/LikedSongs';
 import TopArtistsPage from './Components/TopArtistsPage';
 import TopSongsPage from './Components/TopSongsPage';
 import UserProfile from './Components/UserProfile';
+import IndivProfilePage from './Components/IndivProfilePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,7 @@ root.render(
     <Routes>
       <Route path='/' element = {<App/>}/>
       <Route path = 'discoverpage' element={<DiscoverPage/>}/>
+      <Route path = 'discoverpage/indivprofilepage' element={<IndivProfilePage/>}/>
       <Route path = 'forumnpage' element={<ForumnPage/>}/>
       <Route path = 'inboxpage' element={<InboxPage/>}/>
       <Route path='likedsongs' element={<LikedSongs/>}/>
