@@ -5,6 +5,7 @@ import axios from "axios"
 function UserProfile() {
     //state
     const [userInfo, setUserInfo] = useState(); 
+    const [token, setToken] = useState(); 
 
     const getUserInfo = (userID) => {
         fetch("http://localhost:9000/discoverpg/allUserInfo/" + userID)
@@ -12,8 +13,27 @@ function UserProfile() {
         .then((text) => {setUserInfo(text)})
     }
 
+    const getSpotifyInfo = (userID) => {
+        fetch("http://localhost:9000/spotify/user/")
+        .then((res) => res.json())
+        .then((data) => window.open(data.url))
+    }
+    const path = window.location.href.split('/')[4]
+    console.log(window.location.href)
+    let code = ''
     useEffect(() => {
         getUserInfo("j48981HNmaNpshoSnIZz");
+        if(path){
+            console.log(path); 
+            code = path.split('=')[1]
+            fetch('http://localhost:9000/spotify/callback?code='+code).then(res => res.json()).then(data => {
+                if(data.token){
+                    setToken(data.token)
+                    //console.log(data.token)
+                }
+           //setAccessToken(data.access_token)
+           //setRefreshToken(data.refresh_token)    
+        })}
       }, [])
 
     if(userInfo) {
@@ -24,7 +44,7 @@ function UserProfile() {
     const myPage = (curUserID == pageID) ? true : false
     const allTopArtistsIDs = ["0c173mlxpT3dSFRgMO8XPh"];
     const allTopSongsIDs = ["7zvfDihYiJ8RQ1nRcpKBF5", "6EDO9iiTtwNv6waLwa1UUq", "4QqTDl0Po7cbaZMcGsZmBg", "1yxgsra98r3qAtxqiGZPiX", "3iVcZ5G6tvkXZkZKlMpIUs"]; 
-    const displayedTopArtistsIDs = []; 
+    const displayedTopArtistsIDs = ["0c173mlxpT3dSFRgMO8XPh", "6l3HvQ5sa6mXTsMTB19rO5", "6AgTAQt8XS6jRWi4sX7w49"]; 
     const displayedTopSongsIDs = userInfo.displayedSongIDs; 
 
     const addSongToDisplayed = (song) => {
@@ -54,7 +74,8 @@ function UserProfile() {
                 <h4 style={{textAlign: "left"}}>Add a new song to display: </h4>
                 <AddNewSong topSongsNotInDisplayed={topSongsNotInDisplayed} addSongToDisplayed={addSongToDisplayed}/>
                 <h2>Displayed Artists</h2>
-                {displayedTopArtistsIDs.map((id) => <ArtistCard key={id} id={id}/>)}
+                {displayedTopArtistsIDs.map((id) => <ArtistCard key={id} id={id} token={token}/>)}
+                <button onClick={() => getSpotifyInfo("j48981HNmaNpshoSnIZz")}>login</button>
             </div>
         );
     }
@@ -70,11 +91,16 @@ function UserProfile() {
         return(
             <div style={{alignItems: "center", textAlign: "center"}}>
                 <h1 style={{textAlign: "center", margin: 25, marginLeft: 60, fontSize: 46}}>{username}'s Profile</h1>
+                <header style={{margin: 15, borderWidth: 2, borderStyle: "dashed"}}>
                 <h2>Displayed Songs</h2>
                 <iframe style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + displayedTopSongsIDs[0] + "?utm_source=generator"} width="95%" height="380" frameBorder="0" allowFullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                 {displayedTopSongsIDs.slice(1, displayedTopSongsIDs.length).map((id) => <iframe style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + id + "?utm_source=generator"} width="95%" height="80" frameBorder="0" allowFullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>)}
+                </header>
+                <header style={{margin: 15, borderWidth: 2, borderStyle: "dashed"}}>
                 <h2>Displayed Artists</h2>
-                {displayedTopArtistsIDs.map((id) => <ArtistCard id={id}/>)}
+                {displayedTopArtistsIDs.map((id) => <ArtistCard key={id} id={id} token={token}/>)}
+                </header>
+                <button onClick={() => getSpotifyInfo("j48981HNmaNpshoSnIZz")}>login</button>
             </div>
         );
     }
@@ -103,12 +129,35 @@ class SongCard extends React.Component {
 }
 
 class ArtistCard extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            artistData: null,
+        }
+    }
     render() {
+        if(this.state.artistData) {
+            console.log(this.state.artistData)
         return(
-            <div>
-                <p>{this.props.id}</p>
+            <div style={{display: "flex", alignContent: "center", justifyContent: "center", margin: 15, }}>
+            <img src={this.state.artistData.images[0].url} width="150" height="auto"/>
+            <header style={{margin: 20}}>
+                    <h3>{this.state.artistData.name}</h3>
+                    <h4>Genres: {this.state.artistData.genres[0]}, {this.state.artistData.genres[1]}, {this.state.artistData.genres[2]}</h4>
+                    <h4>Followers: {this.state.artistData.followers.total}</h4>
+            </header>
             </div>
         );
+        }
+        else{
+            if(this.props.token) {
+                console.log("token acquired!")
+                fetch("http://localhost:9000/spotify/getArtist?artistID=" + this.props.id + "&token=" + this.props.token)
+                .then((res) => res.json()).then((data) => this.setState({
+                    artistData: data
+                }))
+            }
+        }
     }
 }
 
