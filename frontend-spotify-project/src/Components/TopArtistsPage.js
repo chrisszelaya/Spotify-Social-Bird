@@ -1,35 +1,42 @@
-// function TopArtistsPage(){
-//     const [displayedArtists, setDisplayedArtists] = useState([]);
+import { Button, Typography, Box } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import TopArtistsList from './TopArtistsList';
 
 
-//     useEffect( () => {
-//         async function fetchArtists(){
-//           const response = await fetch('/topartistspage/topartistslist');
-//           const body = await response.json();
-//           if (response.status !== 200) {
-//             throw Error(body.message) 
-//           }
-//           setDisplayedArtists(body);
-//           //console.log(body);
-//         }
-//         fetchArtists();
-//     } ,[])
+function TopArtistsPage(props){
+    const {user, logout} = props;
+    const [displayedArtists, setDisplayedArtists] = useState([]);
 
 
-//     return(
-//         <div>
-//             <Typography variant='h1'>Top Artists</Typography>
-//             <TopArtistsList user={user} topartists={displayedArtists}/>
+    useEffect( () => {
+        async function fetchArtists(){
+          const response = await fetch('/topartistspage/topartistslist');
+          const body = await response.json();
+          if (response.status !== 200) {
+            throw Error(body.message) 
+          }
+          setDisplayedArtists(body);
+          //console.log(body);
+        }
+        fetchArtists();
+    } ,[])
 
-//             <Box sx={{width:'15vh'}}/>
-//             <Typography variant='h6'>Currently logged in as {user}</Typography>
-//             <Button onClick={logout} variant='contained'>Log Out</Button>
+
+    return(
+        <div>
+            <Typography variant='h1'>Top Artists</Typography>
+            <TopArtistsList user={user} topartists={displayedArtists}/>
+
+            <Box sx={{width:'15vh'}}/>
+            <Typography variant='h6'>Currently logged in as {user}</Typography>
+            <Button onClick={logout} variant='contained'>Log Out</Button>
+
             
-//             {/*
-//             */}
-//         </div>
-//     );
+            {/*
+            */}
+        </div>
+    );
 
 
 
-// }export default TopArtistsPage;
+}export default TopArtistsPage;
