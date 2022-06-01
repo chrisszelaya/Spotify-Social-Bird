@@ -1,4 +1,9 @@
-function TopSongsPage(){
+import { Button, Typography, Box } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import TopSongsList from './TopSongsList';
+
+function TopSongsPage(props){
+    const {user, logout} = props;
     const [displayedSongs, setDisplayedSongs] = useState([]);
 
 
