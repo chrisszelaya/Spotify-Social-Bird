@@ -30,6 +30,7 @@ function TopArtistsPage(props){
             <Box sx={{width:'15vh'}}/>
             <Typography variant='h6'>Currently logged in as {user}</Typography>
             <Button onClick={logout} variant='contained'>Log Out</Button>
+
             
             {/*
             */}
