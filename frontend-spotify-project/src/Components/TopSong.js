@@ -1,16 +1,12 @@
 import React from 'react'
 import { IconButton, Paper, TextField, Typography,Grid,CardMedia,CardContent,Card } from '@mui/material';
 import { Box } from '@mui/system';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 //import DeleteIcon from '@mui/icons-material/Delete';
 //import EditIcon from '@mui/icons-material/Edit';
 //import { useState } from 'react'
 
 function TopSong(props) {
-    const {trackName, artistName, coverPhoto} = props.sng;
+    const {trackName, artistName, coverPhoto} = props;
 
     return (
         <Grid item xs={3}>
