@@ -1,41 +1,87 @@
-import { Button, Typography, Box } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import TopArtistsList from './TopArtistsList';
+import React from 'react'
+import { AccessTokenContext } from './AccessTokenContext';
+import { useContext } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import { ToggleButton } from '@mui/material';
+import { ToggleButtonGroup } from '@mui/material';
 
+function TopArtistsPage() {
+    
+    const { token } = useContext(AccessTokenContext);
+    const [topartists, setTopArtists] = useState([]);
+    const [alignment, setAlignment] = useState('year');
 
-function TopArtistsPage(props){
-    const {user, logout} = props;
-    const [displayedArtists, setDisplayedArtists] = useState([]);
+    useEffect(() => {
+     fetch("/topartists?token="+ token).then(res => res.json()).then(data => setTopArtists(data.items))
+    }, [])
+   
+    const handleChange = (event, newAlignment) => {
+        setAlignment(newAlignment);
+        fetch("/topartists/"+newAlignment+"?token="+ token).then(res => res.json()).then(data => setTopArtists(data.items))
+    };
 
-
-    useEffect( () => {
-        async function fetchArtists(){
-          const response = await fetch('/topartistspage/topartistslist');
-          const body = await response.json();
-          if (response.status !== 200) {
-            throw Error(body.message) 
-          }
-          setDisplayedArtists(body);
-          //console.log(body);
-        }
-        fetchArtists();
-    } ,[])
-
-
-    return(
+    console.log(topartists)
+    return (
         <div>
-            <Typography variant='h1'>Top Artists</Typography>
-            <TopArtistsList user={user} topartists={displayedArtists}/>
-
-            <Box sx={{width:'15vh'}}/>
-            <Typography variant='h6'>Currently logged in as {user}</Typography>
-            <Button onClick={logout} variant='contained'>Log Out</Button>
-            
-            {/*
-            */}
+            <Typography variant="h2">
+                your top artists
+            </Typography>
+            <Box
+                m={1}
+                //margin
+                display="flex"
+                justifyContent="flex-end"
+                alignItems="flex-end"
+            >            
+            <ToggleButtonGroup 
+                color="primary"
+                value={alignment}
+                exclusive
+                onChange={handleChange}
+            >
+                <ToggleButton value="month">Last Month</ToggleButton>
+                <ToggleButton value="year">Last 6 Months</ToggleButton>
+                <ToggleButton value="alltime">All Time</ToggleButton>
+            </ToggleButtonGroup>
+            </Box>
+            <Grid container>
+            {topartists.length > 0 && 
+                topartists.map((val, key) => 
+                    <Grid item xs={12} sm={2}>
+                        <Box style = {{
+                            flex: '1',
+                            padding:'20',
+                            margin:'.25rem',
+                            border: '15px solid white'
+                        }}>
+                            <Card sx={{ maxWidth: 200}}>
+                                <CardMedia
+                                component="img"
+                                height="160"
+                                alt="No Artist Photo Found"
+                                image={(val.images[0] && val.images[0].url) || 'https://image.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179856.jpg'}
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                    {val.name}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Box>
+                    </Grid>
+                
+                )
+            }
+            </Grid>
         </div>
-    );
+    )
+}
 
-
-
-}export default TopArtistsPage;
+export default TopArtistsPage;

@@ -8,8 +8,17 @@ require("dotenv").config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const discoverPageRouter = require("./routes/discoverpg");
+
+var authRouter = require('./routes/auth');
+var savedsongsRouter = require('./routes/savedsongs');
+var topsongsRouter = require('./routes/topsongs');
+var topartistsRouter = require('./routes/topartists');
+
+
 const spotifyPageRouter = require("./routes/spotify");
 const loginRouter = require("./routes/login")
+require('dotenv').config();
+const forumPageRouter = require("./routes/forumpg");
 require('dotenv').config();
 
 var app = express();
@@ -37,6 +46,11 @@ app.use('/users', usersRouter);
 app.use("/spotify", spotifyPageRouter);
 app.use("/discoverpg", discoverPageRouter);
 app.use("/login", loginRouter)
+app.use('/forumpg',forumPageRouter);
+app.use('/auth', authRouter);
+app.use('/savedsongs', savedsongsRouter);
+app.use('/topsongs', topsongsRouter);
+app.use('/topartists', topartistsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
