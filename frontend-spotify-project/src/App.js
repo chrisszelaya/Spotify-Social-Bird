@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 import {Link} from "react-router-dom";
+import LogIn from "./Components/Login";
 import './App.css';
 import React , {useState}from 'react';
     // import {auth} from "./Components/fire";
@@ -9,6 +10,7 @@ import React , {useState}from 'react';
 function App() {
   return (
     <div className="App">
+    <LogIn/>
       <h1>Home (for now)</h1>
       <nav>
       <Link to='/loginpage'> Login Page</Link>

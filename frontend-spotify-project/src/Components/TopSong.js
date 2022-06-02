@@ -6,7 +6,7 @@ import { Box } from '@mui/system';
 //import { useState } from 'react'
 
 function TopSong(props) {
-    const {trackName, artistName, coverPhoto} = props.sng;
+    const {trackName, artistName, coverPhoto} = props;
 
     return (
         <Grid item xs={3}>
