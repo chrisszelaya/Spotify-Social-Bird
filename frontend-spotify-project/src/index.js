@@ -13,9 +13,11 @@ import TopArtistsPage from './Components/TopArtistsPage';
 import TopSongsPage from './Components/TopSongsPage';
 import UserProfile from './Components/UserProfile';
 import IndivProfilePage from './Components/IndivProfilePage';
+import AccessTokenProvider from './Components/AccessTokenContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <AccessTokenProvider>
   <BrowserRouter>
     <Routes>
       <Route path='/' element = {<App/>}/>
@@ -30,6 +32,7 @@ root.render(
       <Route path='userprofile' element={<UserProfile/>}/>
     </Routes>
   </BrowserRouter>
+  </AccessTokenProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

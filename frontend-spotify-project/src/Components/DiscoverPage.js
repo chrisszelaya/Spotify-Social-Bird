@@ -12,7 +12,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 // import {indivProfileCard} from './pagecss';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { common } from "@material-ui/core/colors";
+import { common } from "@mui/material/colors";
 
 function DiscoverPage(){
     const [allInfo, setAllInfo] = useState([]);
