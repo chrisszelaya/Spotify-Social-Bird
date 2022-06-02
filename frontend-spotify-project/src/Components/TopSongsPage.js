@@ -11,6 +11,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import { ToggleButton } from '@mui/material';
 import { ToggleButtonGroup } from '@mui/material';
+import TopSong from './TopSong';
 
 function TopSongsPage() {
     
@@ -61,7 +62,8 @@ function TopSongsPage() {
                             margin:'.25rem',
                             border: '15px solid white'
                         }}>
-                            <Card sx={{ maxWidth: 200}}>
+                        <TopSong name={val.name} artist={val.artists[0].name} image={val.album.images[0] && val.album.images[0].url} songid={val.id}/>
+                        {/* <Card sx={{ maxWidth: 200}}>
                                 <CardMedia
                                 component="img"
                                 height="140"
@@ -77,6 +79,7 @@ function TopSongsPage() {
                                     </Typography>
                                 </CardContent>
                             </Card>
+                        */}
                         </Box>
                     </Grid>
                 
