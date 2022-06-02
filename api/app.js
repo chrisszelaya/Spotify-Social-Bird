@@ -10,6 +10,8 @@ var usersRouter = require('./routes/users');
 const discoverPageRouter = require("./routes/discoverpg");
 const spotifyPageRouter = require("./routes/spotify");
 require('dotenv').config();
+const forumPageRouter = require("./routes/forumpg");
+require('dotenv').config();
 
 var app = express();
 
@@ -35,6 +37,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/spotify", spotifyPageRouter);
 app.use("/discoverpg", discoverPageRouter);
+app.use('/forumpg',forumPageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

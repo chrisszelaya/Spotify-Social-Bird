@@ -49,7 +49,7 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
                     <Tab href="./likedsongs" label = "Liked Songs"/>
                     <Tab href="./topartists" label = "Top Artists"/>
                     <Tab href="./topsongs" label = "Top Songs"/>
-                    <Tab href="./forumnpage" label = "Forumn"/>
+                    <Tab href="./forumpage" label = "Forum"/>
                     <Tab href="./inboxpage" label = "Inbox"/>
             </Tabs>
             <h2>Discover</h2>
@@ -60,6 +60,7 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
             {allInfo && allInfo.map((item) => 
             // id = {item.id} id:item.id,...item.data
             <Card key = {item.id} style = {indivProfileCard}>
+                {console.log(item)}
                 <Link to ='indivprofilepage' state={{id:item.id,spotifyID:item.spotifyID, username:item.username}} style={{textDecoration:'none',color:common.black}}>
                 {/* <CardActionArea component={Link} to={{pathname:'indivprofilepage', state:{id: item.id }}}> */}
                 <h2>Username: {item.username}</h2>

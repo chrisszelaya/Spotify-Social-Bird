@@ -6,13 +6,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import DiscoverPage from './Components/DiscoverPage';
 import LoginPage from './Components/LoginPage';
-import ForumnPage from './Components/ForumnPage';
+import ForumPage from './Components/ForumPage';
 import InboxPage from './Components/InboxPage';
 import LikedSongs from './Components/LikedSongs';
 import TopArtistsPage from './Components/TopArtistsPage';
 import TopSongsPage from './Components/TopSongsPage';
 import UserProfile from './Components/UserProfile';
 import IndivProfilePage from './Components/IndivProfilePage';
+import IndivForumnPage from './Components/IndivForumPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,7 +22,8 @@ root.render(
       <Route path='/' element = {<App/>}/>
       <Route path = 'discoverpage' element={<DiscoverPage/>}/>
       <Route path = 'discoverpage/indivprofilepage' element={<IndivProfilePage/>}/>
-      <Route path = 'forumnpage' element={<ForumnPage/>}/>
+      <Route path = 'forumpage' element={<ForumPage/>}/>
+      <Route path = 'forumpage/indivforumpage' element={<IndivForumnPage/>}/>
       <Route path = 'inboxpage' element={<InboxPage/>}/>
       <Route path='likedsongs' element={<LikedSongs/>}/>
       <Route path='loginpage' element={<LoginPage/>}/>
