@@ -65,7 +65,7 @@ const LogIn=()=>{
                 <input type="password" placeholder="Enter Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
                 <span className='input-icon'><i className="fa fa-envelope"><LockIcon/></i></span>
                 </div>
-                <button className='login-btn'>Sign In</button>
+                <button onClick={login} className='login-btn'>Sign In</button>
                 <a className='signup' href="#">Don't have an account ?</a>
                 <button onClick={register} className='login-btn'>Create an Account</button>
         </div>
