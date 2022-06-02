@@ -47,4 +47,16 @@ router.get("/getArtist", (req, res, next) => {
     }).then((res) => res.json()).then((data) => res.send(data))
 })
 
+router.get("/getSong", (req, res, next) => {
+    console.log(req.query)
+    const headers = {
+        'Authorization': "Bearer " + req.query.token,
+        'Content-Type': "application/json"
+    }; 
+    fetch("https://api.spotify.com/v1/tracks/" + req.query.songID, {
+        method: "GET", 
+        headers: headers
+    }).then((res) => res.json()).then((data) => res.send(data))
+})
+
 module.exports = router; 
