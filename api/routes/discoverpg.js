@@ -1,14 +1,14 @@
 const express = require("express")
 const router = express.Router()
 const db = require("../firebase")
-const {getDocs, collection, addDoc, deleteDoc, doc, updateDoc, getDoc} = require("firebase/firestore")
+const {getDocs, collection, addDoc, deleteDoc, doc, updateDoc} = require("firebase/firestore")
 
 router.get("/allUserInfo", async (req, res, next) => {
   const userInfo = []
   const docs = await getDocs(collection(db, "users"))
-  docs.forEach((doc) => userInfo.push({id: doc.id, ...doc.data()}))
+  docs.forEach((doc) => userInfo.push({id: doc.id,...doc.data()}))
   res.json({result:userInfo})
-  // res.send(result);
+  // res.send(,result);
 })
 
 router.get("/allUserInfo/:id", async (req, res, next) => {
@@ -91,7 +91,6 @@ router.put("/removeArtist/:userID/:artistID", (req, res, next) => {
         }).then(res.send("success"))
     })
 })
-
 // router.put("/edit",(req,res,next) =>{
 //   // console.log(req.body)
 //   updateDoc(doc(db,"posts", req.body.messageId),{
