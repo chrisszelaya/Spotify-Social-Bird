@@ -11,7 +11,7 @@ import axios from 'axios';
 
 
 const LogIn=()=>{
-    const { token, setAccessToken } = useContext(AccessTokenContext);
+    const { token, setAccessToken, user, setUser } = useContext(AccessTokenContext);
     const [email,setEmail]= useState('');
     const [usernameForm, setUsernameForm] = useState(""); 
     const [spotifyID, setSpotifyID] = useState(""); 
@@ -19,10 +19,10 @@ const LogIn=()=>{
     const [accountCreationScreen, setAccountCreationScreen] = useState(false); 
     console.log(email); 
     const [password,setPassword]= useState('');
-    const [user,setUser]= useState("");
+    console.log(user)
     let navigate = useNavigate(); 
 
-    const getSpotifyInfo = async (userID) => {
+    const getSpotifyInfo = async () => {
         fetch("http://localhost:9000/spotify/user/")
         .then((res) => res.json())
         .then((data) => window.open(data.url))
@@ -30,6 +30,9 @@ const LogIn=()=>{
 
     const path = window.location.href.split('/')[4]
     let code = ''
+    if(token=="" && !path) {
+        getSpotifyInfo(); 
+    }
     useEffect(() => {
         if(path){
             console.log(path); 
@@ -38,7 +41,7 @@ const LogIn=()=>{
                 if(data.token){
                     setAccessToken(data.token)
                     console.log(data.token)
-                    navigate("../userprofile");
+                    console.log(user); 
                 }  
         })}
     }, [])
@@ -53,7 +56,7 @@ const LogIn=()=>{
         e.preventDefault();
         try{
 
-            const user = createUserWithEmailAndPassword(auth,email,password).then((user) => {
+            const hi = createUserWithEmailAndPassword(auth,email,password).then((f) => {
                 const userName = email.split("@")[0]; 
                 axios.post("http://localhost:9000/login/createAccount", {
                     email: email, 
@@ -85,8 +88,11 @@ const LogIn=()=>{
         e.preventDefault();
         try{
 
-            const user = signInWithEmailAndPassword(auth,email,password).then((user) => {
-                fetch("http://localhost:9000/login/userFromEmail/" + email).then((res) => res.json()).then((text) => getSpotifyInfo(text.id))
+            const hi = signInWithEmailAndPassword(auth,email,password).then((d) => {
+                fetch("http://localhost:9000/login/userFromEmail/" + email).then((res) => res.json()).then((text) => {
+                    setUser(text.id);
+                    navigate("../userprofile");
+                })
             })
 
         }catch(error){
