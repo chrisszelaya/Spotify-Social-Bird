@@ -10,7 +10,6 @@ import React , {useState}from 'react';
 function App() {
   return (
     <div className="App">
-    <LogIn/>
       <h1>Home (for now)</h1>
       <nav>
       <Link to='/loginpage'> Login Page</Link>

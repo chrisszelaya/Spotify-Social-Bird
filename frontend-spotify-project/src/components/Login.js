@@ -53,7 +53,7 @@ const LogIn=()=>{
 
     return (
         <nav className='Spotify'>
-            <div className='Title'>Spotify <button onClick={logout} className="logout">Log out</button>
+            <div className='Title'>Spotify
             </div>
         <div className='login-form'>
             <h1>Log In</h1>
