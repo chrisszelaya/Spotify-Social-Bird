@@ -12,10 +12,85 @@ router.get("/allUserInfo", async (req, res, next) => {
 })
 
 router.get("/allUserInfo/:id", async (req, res, next) => {
-  console.log(req.params)  // shows the path params (stuff after /info/)
-  res.sendStatus(200)  // say OK without sending data back
+  getDoc(doc(db, "users", req.params.id))
+  .then((doc) => {res.send(doc.data())})
 })
 
+router.put("/addSong/:userID/:songID", (req, res, next) => {
+  const newRef = doc(db, "users", req.params.userID);
+  console.log(req.params)
+    getDoc(newRef)
+    .then((doc) =>{
+        let curSongs = doc.data().displayedSongIDs; 
+        if(!curSongs) {
+          curSongs = [];
+        }
+        curSongs.push(req.params.songID)
+        updateDoc(newRef, {
+            displayedSongIDs: curSongs
+        }).then(res.send("success"))
+    })
+})
+
+router.put("/addArtist/:userID/:artistID", (req, res, next) => {
+  const newRef = doc(db, "users", req.params.userID);
+  console.log(req.params)
+    getDoc(newRef)
+    .then((doc) =>{
+        let curArtists = doc.data().displayedArtistIDs; 
+        if(!curArtists) {
+          curArtists = [];
+        }
+        curArtists.push(req.params.artistID)
+        updateDoc(newRef, {
+            displayedArtistIDs: curArtists
+        }).then(res.send("success"))
+    })
+})
+
+router.put("/removeSong/:userID/:songID", (req, res, next) => {
+  const newRef = doc(db, "users", req.params.userID);
+  console.log(req.params)
+    getDoc(newRef)
+    .then((doc) =>{
+        let curSongs = doc.data().displayedSongIDs; 
+        if(!curSongs) {
+          curSongs = [];
+        }
+        let newArray = []; 
+        for(let x = 0; x < curSongs.length; x++) {
+          if(curSongs[x] != req.params.songID) {
+            console.log(curSongs[x])
+            newArray.push(curSongs[x])
+          }
+        }
+        updateDoc(newRef, {
+            displayedSongIDs: newArray
+        }).then(res.send("success"))
+    })
+})
+
+router.put("/removeArtist/:userID/:artistID", (req, res, next) => {
+  const newRef = doc(db, "users", req.params.userID);
+  console.log(req.params)
+    getDoc(newRef)
+    .then((doc) =>{
+        let curArtists = doc.data().displayedArtistIDs; 
+        if(!curArtists) {
+          curArtists = [];
+        }
+        let newArray = []; 
+        for(let x = 0; x < curArtists.length; x++) {
+          if(curArtists[x] != req.params.artistID) {
+            console.log(curArtists[x])
+            newArray.push(curArtists[x])
+          }
+        }
+        updateDoc(newRef, {
+            displayedArtistIDs: newArray
+        }).then(res.send("success"))
+    })
+})
 // router.put("/edit",(req,res,next) =>{
 //   // console.log(req.body)
 //   updateDoc(doc(db,"posts", req.body.messageId),{
