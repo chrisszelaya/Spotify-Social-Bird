@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {FormControl, Select, InputLabel, MenuItem, Button} from "@mui/material";
 import axios from "axios"
+import {AccessTokenContext} from "./AccessTokenContext"
 
 function UserProfile() {
     //state
     const [userInfo, setUserInfo] = useState(); 
-    const [token, setToken] = useState(); 
+    const { token, setAccessToken, user, setUser } = useContext(AccessTokenContext);
+    console.log(token)
+    console.log(user)
 
     const getUserInfo = (userID) => {
         fetch("http://localhost:9000/discoverpg/allUserInfo/" + userID)
@@ -18,26 +21,14 @@ function UserProfile() {
         .then((res) => res.json())
         .then((data) => window.open(data.url))
     }
-    const path = window.location.href.split('/')[4]
-    console.log(window.location.href)
-    let code = ''
+    
     useEffect(() => {
         getUserInfo("j48981HNmaNpshoSnIZz");
-        if(path){
-            console.log(path); 
-            code = path.split('=')[1]
-            fetch('http://localhost:9000/spotify/callback?code='+code).then(res => res.json()).then(data => {
-                if(data.token){
-                    setToken(data.token)
-                    //console.log(data.token)
-                }
-           //setAccessToken(data.access_token)
-           //setRefreshToken(data.refresh_token)    
-        })}
+        
       }, [])
 
     if(userInfo) {
-    const curUserID = "j48981HNmaNpshoSnIZz"; 
+    const curUserID = user; 
     const pageID = "j48981HNmaNpshoSnIZz";
     const username = userInfo.username; 
     const privatePage = userInfo.private; 
@@ -90,11 +81,11 @@ function UserProfile() {
                 <SongCard id={displayedTopSongsIDs[0]} removeSong={removeSongFromDisplayed} feature={true}/>
                 {displayedTopSongsIDs.slice(1, displayedTopSongsIDs.length).map((id) => <SongCard id={id} removeSong={removeSongFromDisplayed} feature={false}/>)}
                 <h4 style={{textAlign: "left"}}>Add a new song to display: </h4>
-                <AddNewSong topSongsNotInDisplayed={topSongsNotInDisplayed} addSongToDisplayed={addSongToDisplayed}/>
+                <AddNewSong topSongsNotInDisplayed={topSongsNotInDisplayed} addSongToDisplayed={addSongToDisplayed} token={token}/>
                 </header>
                 <header style={{margin: 15, borderWidth: 2, borderStyle: "dashed"}}>
                 <h2>Displayed Artists</h2>
-                {displayedTopArtistsIDs.map((id) => <ArtistCard key={id} id={id} token={token} removeArtist={removeArtistFromDisplayed}/>)}
+                {displayedTopArtistsIDs.map((id) => <ArtistCard key={id} id={id} token={token} myPage={true} removeArtist={removeArtistFromDisplayed}/>)}
                 <h4 style={{textAlign: "left"}}>Add a new artist to display: </h4>
                 <AddNewArtist token={token} topArtistsNotInDisplayed={topArtistsNotInDisplayed} addArtistToDisplayed={addArtistToDisplayed}/>
                 </header>
@@ -121,7 +112,7 @@ function UserProfile() {
                 </header>
                 <header style={{margin: 15, borderWidth: 2, borderStyle: "dashed"}}>
                 <h2>Displayed Artists</h2>
-                {displayedTopArtistsIDs.map((id) => <ArtistCard key={id} id={id} token={token}/>)}
+                {displayedTopArtistsIDs.map((id) => <ArtistCard key={id} id={id} token={token} myPage={false}/>)}
                 </header>
                 <button onClick={() => getSpotifyInfo("j48981HNmaNpshoSnIZz")}>login</button>
             </div>
@@ -161,6 +152,7 @@ class ArtistCard extends React.Component {
     render() {
         if(this.state.artistData) {
             console.log(this.state.artistData)
+            if(this.props.myPage){
         return(
             <div style={{display: "flex", alignItems: "center", justifyContent: "center", margin: 15, }}>
             <img src={this.state.artistData.images[0].url} width="150" height="auto"/>
@@ -172,6 +164,19 @@ class ArtistCard extends React.Component {
             <Button style={{margin: 15}} variant="outlined" color="error" onClick={() => {this.props.removeArtist(this.props.id)}}>Remove</Button>
             </div>
         );
+            }
+        else {
+            return(
+                <div style={{display: "flex", alignItems: "center", justifyContent: "center", margin: 15, }}>
+                <img src={this.state.artistData.images[0].url} width="150" height="auto"/>
+                <header style={{margin: 20}}>
+                        <h3>{this.state.artistData.name}</h3>
+                        <h4>Genres: {this.state.artistData.genres[0]}, {this.state.artistData.genres[1]}, {this.state.artistData.genres[2]}</h4>
+                        <h4>Followers: {this.state.artistData.followers.total}</h4>
+                </header>
+                </div>
+            );
+        }
         }
         else{
             if(this.props.token) {
@@ -190,9 +195,17 @@ class AddNewSong extends React.Component {
         super(props)
         this.state = {
             curSongToDisplay: "",
+            songArray: [],
+            runningCounter: 0,
         }
     }
     render() {
+        if(this.state.runningCounter >= this.props.topSongsNotInDisplayed.length) {
+            let nonStateSongArray = []; 
+            for(let x =0; x < this.state.songArray.length; x++) {
+                if((this.state.songArray[x].id && this.state.songArray[x].name))
+                nonStateSongArray.push(this.state.songArray[x]);
+            }
         return(
             <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                 <FormControl sx={{ m: 1, minWidth: 220 }}>
@@ -205,13 +218,48 @@ class AddNewSong extends React.Component {
                         onChange={(e) => this.setState({
                             curSongToDisplay: e.target.value,
                         })}>
-                        {this.props.topSongsNotInDisplayed.map((song) => <MenuItem value={song}>{song}</MenuItem>)}
+                        {nonStateSongArray.map((song) => <MenuItem value={song.id}>{song.name}</MenuItem>)}
                     </Select>
                 </FormControl>
-                <Button style={{margin: 10}} variant="outlined" onClick={() => {this.props.addSongToDisplayed(this.state.curSongToDisplay)}}>Add</Button>
+                <Button style={{margin: 10}} variant="outlined" onClick={() => {
+                    this.props.addSongToDisplayed(this.state.curSongToDisplay); 
+                    this.setState({
+                        curSongToDisplay: "",
+                        songArray: [],
+                        runningCounter: 0,
+                    })
+                }}>Add</Button>
             </div>
         );
+        }
+        else {
+            console.log("123")
+            console.log(this.props.token); 
+            console.log(this.state.runningCounter < this.props.topSongsNotInDisplayed.length)
+            console.log(this.state.runningCounter==this.state.songArray.length)
+            if(this.props.token && this.state.runningCounter < this.props.topSongsNotInDisplayed.length && this.state.runningCounter==this.state.songArray.length) {
+                console.log("456")
+                const x = this.state.runningCounter;
+                fetch("http://localhost:9000/spotify/getSong?songID=" + this.props.topSongsNotInDisplayed[x] + "&token=" + this.props.token)
+                .then((res) => res.json()).then((data) => {
+                    console.log(data); 
+                    let newVar = {
+                        id: this.props.topSongsNotInDisplayed[x], 
+                        name: data.name + " by " + data.artists[0].name,
+                    }
+                    console.log(newVar)
+                    let newArray = this.state.songArray; 
+                    newArray[x] = newVar; 
+                    this.setState({
+                        runningCounter: x+1,
+                        songArray: newArray
+                    })
+                    console.log("pushed a new song to new array!")
+                })
+            }
+
     }
+}
 }
 
 class AddNewArtist extends React.Component {

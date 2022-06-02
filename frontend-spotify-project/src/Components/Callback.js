@@ -6,7 +6,7 @@ import HomePage from './SavedSongs';
 
 function Callback(props) {
 
-    const [accessToken, setAccessToken] = useState('')
+    const [token, setToken] = useState('')
     const [refreshToken, setRefreshToken] = useState('')
     const code = window.location.href.split('/')[3].split('=')[1]
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { AccessTokenContext } from '../Contexts/accessTokenContext';
+import { AccessTokenContext } from './AccessTokenContext';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -12,15 +12,15 @@ import CardContent from '@mui/material/CardContent';
 
 function SavedSongs() {
     
-    const { accessToken } = useContext(AccessTokenContext);
+    const { token } = useContext(AccessTokenContext);
     const [songs, setSongs] = useState([])
 
 
     useEffect(() => {
-     fetch("/savedsongs?token="+ accessToken).then(res => res.json()).then(data => setSongs(data.items))
+     fetch("/savedsongs?token="+ token).then(res => res.json()).then(data => setSongs(data.items))
     }, [])
    
-    console.log(accessToken)
+    console.log(token)
     console.log(songs)
     return (
         <div>

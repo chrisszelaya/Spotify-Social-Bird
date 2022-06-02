@@ -1,5 +1,5 @@
 import React from 'react'
-import { AccessTokenContext } from '../Contexts/accessTokenContext';
+import { AccessTokenContext } from './AccessTokenContext';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -7,9 +7,9 @@ import {Link} from "react-router-dom";
 
 function TrueHome() {
     
-    const { accessToken } = useContext(AccessTokenContext);;
+    const { token } = useContext(AccessTokenContext);;
 
-    console.log(accessToken);
+    console.log(token);
     return (
         <div className="App">
             <h1>Home (for now)</h1>

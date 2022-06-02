@@ -16,6 +16,7 @@ var topartistsRouter = require('./routes/topartists');
 
 
 const spotifyPageRouter = require("./routes/spotify");
+const loginRouter = require("./routes/login")
 require('dotenv').config();
 const forumPageRouter = require("./routes/forumpg");
 require('dotenv').config();
@@ -44,6 +45,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/spotify", spotifyPageRouter);
 app.use("/discoverpg", discoverPageRouter);
+app.use("/login", loginRouter)
 app.use('/forumpg',forumPageRouter);
 app.use('/auth', authRouter);
 app.use('/savedsongs', savedsongsRouter);

@@ -1,5 +1,5 @@
 import React from 'react'
-import { AccessTokenContext } from '../Contexts/accessTokenContext';
+import { AccessTokenContext } from './AccessTokenContext';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -15,17 +15,17 @@ import TopSong from './TopSong';
 
 function TopSongsPage() {
     
-    const { accessToken } = useContext(AccessTokenContext);
+    const { token } = useContext(AccessTokenContext);
     const [topsongs, setTopSongs] = useState([]);
     const [alignment, setAlignment] = useState('year');
 
     useEffect(() => {
-     fetch("/topsongs?token="+ accessToken).then(res => res.json()).then(data => setTopSongs(data.items))
+     fetch("/topsongs?token="+ token).then(res => res.json()).then(data => setTopSongs(data.items))
     }, [])
 
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
-        fetch("/topsongs/"+newAlignment+"?token="+ accessToken).then(res => res.json()).then(data => setTopSongs(data.items))
+        fetch("/topsongs/"+newAlignment+"?token="+ token).then(res => res.json()).then(data => setTopSongs(data.items))
     };
    
     console.log(topsongs)

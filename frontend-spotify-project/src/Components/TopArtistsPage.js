@@ -1,5 +1,5 @@
 import React from 'react'
-import { AccessTokenContext } from '../Contexts/accessTokenContext';
+import { AccessTokenContext } from './AccessTokenContext';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -14,17 +14,17 @@ import { ToggleButtonGroup } from '@mui/material';
 
 function TopArtistsPage() {
     
-    const { accessToken } = useContext(AccessTokenContext);
+    const { token } = useContext(AccessTokenContext);
     const [topartists, setTopArtists] = useState([]);
     const [alignment, setAlignment] = useState('year');
 
     useEffect(() => {
-     fetch("/topartists?token="+ accessToken).then(res => res.json()).then(data => setTopArtists(data.items))
+     fetch("/topartists?token="+ token).then(res => res.json()).then(data => setTopArtists(data.items))
     }, [])
    
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
-        fetch("/topartists/"+newAlignment+"?token="+ accessToken).then(res => res.json()).then(data => setTopArtists(data.items))
+        fetch("/topartists/"+newAlignment+"?token="+ token).then(res => res.json()).then(data => setTopArtists(data.items))
     };
 
     console.log(topartists)
