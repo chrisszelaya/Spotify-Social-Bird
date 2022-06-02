@@ -8,6 +8,7 @@ require("dotenv").config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const discoverPageRouter = require("./routes/discoverpg");
+const spotifyPageRouter = require("./routes/spotify");
 require('dotenv').config();
 
 var app = express();
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use("/spotify", spotifyPageRouter);
 app.use("/discoverpg", discoverPageRouter);
 
 // catch 404 and forward to error handler
