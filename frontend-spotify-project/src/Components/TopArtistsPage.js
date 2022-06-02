@@ -66,7 +66,7 @@ function TopArtistsPage() {
                                 component="img"
                                 height="160"
                                 alt="No Artist Photo Found"
-                                image={val.images[0] && val.images[0].url}
+                                image={(val.images[0] && val.images[0].url) || 'https://image.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179856.jpg'}
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
