@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const db = require("../firebase")
-const {getDocs, collection, addDoc, deleteDoc, doc, updateDoc} = require("firebase/firestore")
+const {getDocs, collection, addDoc, deleteDoc, doc, updateDoc, getDoc} = require("firebase/firestore")
 
 router.get("/allUserInfo", async (req, res, next) => {
   const userInfo = []

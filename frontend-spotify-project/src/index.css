@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#main{
+  font-size: 50px;
+  margin:50px
+}
+
+#fields{
+  margin: 50 px 0px;
+}
+
+input{
+  font-size:50px
+}
+
+button{
+  font-size:50px;
+  margin:0px 20px 0px 0px;
+}

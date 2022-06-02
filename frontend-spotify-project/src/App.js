@@ -1,6 +1,10 @@
 // import logo from './logo.svg';
 import {Link} from "react-router-dom";
 import './App.css';
+import React , {useState}from 'react';
+    // import {auth} from "./Components/fire";
+    // import {createUserWithEmailAndPassword,onAuthStateChanged, signOut, signInWithEmailAndPassword} from 'firebase/auth';
+    // import LogIn from './Components/Login';
 
 function App() {
   return (

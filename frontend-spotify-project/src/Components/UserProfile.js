@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {FormControl, Select, InputLabel, MenuItem, Button} from "@mui/material";
 import axios from "axios"
+import {AccessTokenContext} from "./AccessTokenContext"
 
 function UserProfile() {
     //state
     const [userInfo, setUserInfo] = useState(); 
-    const [token, setToken] = useState(); 
+    const { token } = useContext(AccessTokenContext);
+    console.log(token)
 
     const getUserInfo = (userID) => {
         fetch("http://localhost:9000/discoverpg/allUserInfo/" + userID)
@@ -18,22 +20,10 @@ function UserProfile() {
         .then((res) => res.json())
         .then((data) => window.open(data.url))
     }
-    const path = window.location.href.split('/')[4]
-    console.log(window.location.href)
-    let code = ''
+    
     useEffect(() => {
         getUserInfo("j48981HNmaNpshoSnIZz");
-        if(path){
-            console.log(path); 
-            code = path.split('=')[1]
-            fetch('http://localhost:9000/spotify/callback?code='+code).then(res => res.json()).then(data => {
-                if(data.token){
-                    setToken(data.token)
-                    //console.log(data.token)
-                }
-           //setAccessToken(data.access_token)
-           //setRefreshToken(data.refresh_token)    
-        })}
+        
       }, [])
 
     if(userInfo) {
