@@ -13,7 +13,7 @@ function App() {
       <br></br>
       <Link to='/discoverpage'>Discover Page</Link>
       <br></br>
-      <Link to='/forumnpage'>Forumn Page</Link>
+      <Link to='/forumpage'>Forum Page</Link>
       <br></br>
       <Link to='/inboxpage'>Inbox Page</Link>
       <br></br>
