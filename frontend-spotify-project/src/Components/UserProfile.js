@@ -6,7 +6,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import {Link} from "react-router-dom";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
+    const pageID = props.id;
+    console.log(props);
     //state
     const [userInfo, setUserInfo] = useState(); 
     const [topArtists, setTopArtists] = useState(); 
@@ -21,7 +23,7 @@ const UserProfile = () => {
         .then((text) => {setUserInfo(text)})
     }
 
-    const getSpotifyInfo = (userID) => {
+    const getSpotifyInfo = () => {
         fetch("http://localhost:9000/spotify/user/")
         .then((res) => res.json())
         .then((data) => window.open(data.url))
@@ -48,14 +50,13 @@ const UserProfile = () => {
     }
 
     useEffect(() => {
-        getUserInfo("j48981HNmaNpshoSnIZz");
+        getUserInfo(pageID);
         getTopArtists(); 
         getTopSongs(); 
       }, [])
 
     if(userInfo && topArtists && topSongs) {
     const curUserID = user; 
-    const pageID = "j48981HNmaNpshoSnIZz";
     const username = userInfo.username; 
     const privatePage = userInfo.private; 
     const myPage = (curUserID == pageID) ? true : false
