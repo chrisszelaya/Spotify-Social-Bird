@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import {Link} from "react-router-dom";
-import LogIn from "./Components/Login";
+import LogIn from "./components2/Login";
 import './App.css';
 import React , {useState}from 'react';
     // import {auth} from "./Components/fire";
