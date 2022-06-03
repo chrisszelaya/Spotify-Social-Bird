@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {FormControl, Select, InputLabel, MenuItem, Button} from "@mui/material";
-import axios from "axios"
-import {AccessTokenContext} from "./AccessTokenContext"
+import axios from "axios";
+import {AccessTokenContext} from "./AccessTokenContext";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import {Link} from "react-router-dom";
 
 const UserProfile = (props) => {
     const pageID = props.id;
@@ -99,6 +102,18 @@ const UserProfile = (props) => {
             }
         }
         return(
+            <div>
+            <h1>Songbird</h1>
+            <Tabs centered>
+                    {/* <Tab href="/" label = "Home" /> */}
+                    <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Your Profile"/>
+                    <Tab label = "Discover" to='/discoverpage' component={Link}/>
+                    <Tab label = "Liked Songs" to='/savedsongs' component={Link}/>
+                    <Tab label = "Top Songs" to='/topsongs' component={Link}/>
+                    <Tab label = "Top Artists" to='/topartists' component={Link}/>
+                    <Tab label = "Forum" to='/forumpage' component={Link}/>
+                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
+            </Tabs>
             <div style={{alignItems: "center", textAlign: "center"}}>
                 <h1 style={{textAlign: "left", margin: 25, marginLeft: 60, fontSize: 46}}>{username}'s Profile (yours)</h1>
                 <header style={{margin: 15, borderWidth: 2, borderStyle: "dashed"}}>
@@ -115,6 +130,7 @@ const UserProfile = (props) => {
                 <AddNewArtist token={token} topArtistsNotInDisplayed={topArtistsNotInDisplayed} addArtistToDisplayed={addArtistToDisplayed}/>
                 </header>
                 <button onClick={() => getSpotifyInfo("j48981HNmaNpshoSnIZz")}>login</button>
+            </div>
             </div>
         );
     }
