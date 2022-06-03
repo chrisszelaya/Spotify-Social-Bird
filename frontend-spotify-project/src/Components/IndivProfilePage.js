@@ -2,10 +2,12 @@ import React, {useState, useEffect,useContext} from "react"
 import { useLocation } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-// import { AccessTokenContext } from './AccessTokenContext';
+import UserProfile from "./UserProfile.js"
+import { AccessTokenContext } from './AccessTokenContext';
 
 
 function IndivProfilePage(props){
+    const {user, token} = useContext(AccessTokenContext)
     const location = useLocation();
     const USERNAME = location.state?.spotifyID;
     const [userInfo, setUserInfo] = useState(props.userInfo)
@@ -34,7 +36,7 @@ function IndivProfilePage(props){
                     <Tab href="./forumnpage" label = "Forumn"/>
                     <Tab href="./inboxpage" label = "Inbox"/>
             </Tabs>
-           {USERNAME}'s Profile
+            <UserProfile id={location.state?.id} />
            {console.log(location.state)}
            {/* {userInfo.username} */}
         </div>
