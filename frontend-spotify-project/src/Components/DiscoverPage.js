@@ -1,5 +1,5 @@
 //Discover Page
-import React, {useEffect,useState} from "react";
+import React, {useEffect,useState, useContext} from "react";
 // import IndivProfilePage from "./IndivProfilePage";
 import Card from '@mui/material/Card';
 // import CardActionArea from '@mui/material/CardActionArea';
@@ -13,8 +13,12 @@ import ChatIcon from '@mui/icons-material/Chat';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { common } from "@mui/material/colors";
+import { AccessTokenContext } from "./AccessTokenContext";
+import { getThemeProps } from "@mui/system";
 
 function DiscoverPage(){
+    const {user, setUser, setAccessToken} = useContext(AccessTokenContext); 
+    console.log(user); 
     const [allInfo, setAllInfo] = useState([]);
 
     const indivProfileCard ={
@@ -44,7 +48,7 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
             <h1>Spotify Social</h1>
             <Tabs centered>
                     {/* <Tab href="/" label = "Home" /> */}
-                    <Tab href="./userprofile" label = "Your Profile"/>
+                    <Tab href='discoverpage/indivprofilepage' state={{id: user}} label = "Your Profile"/>
                     <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Discover"/>
                     <Tab href="./likedsongs" label = "Liked Songs"/>
                     <Tab href="./topartists" label = "Top Artists"/>

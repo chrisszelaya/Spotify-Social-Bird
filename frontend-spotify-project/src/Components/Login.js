@@ -17,7 +17,7 @@ const LogIn=()=>{
     const [spotifyID, setSpotifyID] = useState(""); 
     const [statusText, setStatusText] = useState(""); 
     const [accountCreationScreen, setAccountCreationScreen] = useState(false); 
-    console.log(email);
+    console.log(token);
     const [password,setPassword]= useState('');
     console.log(user)
     let navigate = useNavigate(); 
