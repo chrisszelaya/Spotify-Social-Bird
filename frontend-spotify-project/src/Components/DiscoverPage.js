@@ -1,5 +1,5 @@
 //Discover Page
-import React, {useEffect,useState} from "react";
+import React, {useEffect,useState, useContext} from "react";
 // import IndivProfilePage from "./IndivProfilePage";
 import Card from '@mui/material/Card';
 // import CardActionArea from '@mui/material/CardActionArea';
@@ -14,8 +14,12 @@ import Tab from '@mui/material/Tab';
 import {Link} from "react-router-dom";
 import { Typography } from '@mui/material';
 import { common } from "@mui/material/colors";
+import { AccessTokenContext } from "./AccessTokenContext";
+import { getThemeProps } from "@mui/system";
 
 function DiscoverPage(){
+    const {user, setUser, setAccessToken} = useContext(AccessTokenContext); 
+    console.log(user); 
     const [allInfo, setAllInfo] = useState([]);
 
     const indivProfileCard ={
