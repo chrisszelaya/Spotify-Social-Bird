@@ -20,6 +20,14 @@ import AccessTokenProvider from './Components/AccessTokenContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+reportWebVitals();
+
+/*
   <AccessTokenProvider>
   <BrowserRouter>
     <Routes>
@@ -38,7 +46,5 @@ root.render(
     </Routes>
   </BrowserRouter>
   </AccessTokenProvider>
-);
-
-reportWebVitals();
+  */
 

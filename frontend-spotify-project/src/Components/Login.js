@@ -91,7 +91,7 @@ const LogIn=()=>{
             const hi = signInWithEmailAndPassword(auth,email,password).then((d) => {
                 fetch("http://localhost:9000/login/userFromEmail/" + email).then((res) => res.json()).then((text) => {
                     setUser(text.id);
-                    navigate("../userprofile");
+                    navigate("../truehome");
                 })
             })
 
