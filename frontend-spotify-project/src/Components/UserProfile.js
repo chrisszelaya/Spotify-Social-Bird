@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 
 const UserProfile = (props) => {
     const pageID = props.id;
-    console.log(props);
     //state
     const [userInfo, setUserInfo] = useState(); 
     const [topArtists, setTopArtists] = useState(); 
