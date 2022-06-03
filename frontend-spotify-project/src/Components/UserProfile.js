@@ -111,7 +111,7 @@ const UserProfile = (props) => {
                     <Tab label = "Top Songs" to='/topsongs' component={Link}/>
                     <Tab label = "Top Artists" to='/topartists' component={Link}/>
                     <Tab label = "Forum" to='/forumpage' component={Link}/>
-                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
+                    {/* <Tab label = "Inbox" to='/inboxpage' component={Link}/> */}
             </Tabs>
             <div style={{alignItems: "center", textAlign: "center"}}>
                 <h1 style={{textAlign: "left", margin: 25, marginLeft: 60, fontSize: 46}}>{username}'s Profile (yours)</h1>
@@ -166,7 +166,7 @@ class SongCard extends React.Component {
             return(
                 <div style={{ alignItems: "center", margin: 15, borderStyle: "dotted", borderWidth: 1}}>
                     <iframe key={this.props.id} style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + this.props.id + "?utm_source=generator"} width="95%" height="380" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                    <Button style={{margin: 15}} variant="outlined" onClick={() => {this.props.removeSong(this.props.id)}}>Remove from Displayed Songs</Button>
+                    <Button style={{margin: 15, maxWidth: 300}} color="error" variant="outlined" onClick={() => {this.props.removeSong(this.props.id)}}>Remove from Displayed Songs</Button>
                 </div>
             );
         }
@@ -174,7 +174,7 @@ class SongCard extends React.Component {
             return(
                 <div style={{ alignItems: "center", margin: 15, borderStyle: "dotted", borderWidth: 1}}>
                     <iframe key={this.props.id} style={{borderRadius: 12, margin: 8}} src={"https://open.spotify.com/embed/track/" + this.props.id + "?utm_source=generator"} width="95%" height="80" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                    <Button style={{margin: 15}} variant="outlined" onClick={() => {this.props.removeSong(this.props.id)}}>Remove from Displayed Songs</Button>
+                    <Button style={{margin: 15, maxWidth: 300}} color="error" variant="outlined" onClick={() => {this.props.removeSong(this.props.id)}}>Remove from Displayed Songs</Button>
                 </div>
             );
         }
@@ -199,7 +199,7 @@ class ArtistCard extends React.Component {
                     <h4>Genres: {this.state.artistData.genres[0]}, {this.state.artistData.genres[1]}, {this.state.artistData.genres[2]}</h4>
                     <h4>Followers: {this.state.artistData.followers.total}</h4>
             </header>
-            <Button style={{margin: 15}} variant="outlined" color="error" onClick={() => {this.props.removeArtist(this.props.id)}}>Remove</Button>
+            <Button style={{margin: 15, maxWidth: 300}} variant="outlined" color="error" onClick={() => {this.props.removeArtist(this.props.id)}}>Remove from Displayed Artists</Button>
             </div>
         );
             }
@@ -246,7 +246,7 @@ class AddNewSong extends React.Component {
             }
         return(
             <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <FormControl sx={{ m: 1, minWidth: 220 }}>
+                <FormControl sx={{ m: 1, minWidth: 220}}>
                     <InputLabel id="song-to-display-label">Choose Song to Display</InputLabel>
                     <Select
                         labelId="song-to-display-label"
@@ -259,7 +259,7 @@ class AddNewSong extends React.Component {
                         {nonStateSongArray.map((song) => <MenuItem value={song.id}>{song.name}</MenuItem>)}
                     </Select>
                 </FormControl>
-                <Button style={{margin: 10}} variant="outlined" onClick={() => {
+                <Button style={{margin: 10, maxWidth: 100}} variant="outlined" onClick={() => {
                     this.props.addSongToDisplayed(this.state.curSongToDisplay); 
                     this.setState({
                         curSongToDisplay: "",
@@ -271,11 +271,8 @@ class AddNewSong extends React.Component {
         );
         }
         else {
-            console.log("123")
-            console.log(this.props.token); 
-            console.log(this.state.runningCounter < this.props.topSongsNotInDisplayed.length)
-            console.log(this.state.runningCounter==this.state.songArray.length)
             if(this.props.token && this.state.runningCounter < this.props.topSongsNotInDisplayed.length && this.state.runningCounter==this.state.songArray.length) {
+                if(this.props.token && this.state.runningCounter < this.props.topSongsNotInDisplayed.length && this.state.runningCounter==this.state.songArray.length) {
                 const x = this.state.runningCounter;
                 fetch("http://localhost:9000/spotify/getSong?songID=" + this.props.topSongsNotInDisplayed[x] + "&token=" + this.props.token)
                 .then((res) => res.json()).then((data) => {
@@ -327,7 +324,7 @@ class AddNewArtist extends React.Component {
                         {nonStateArtistArray.map((artist) => <MenuItem value={artist.id}>{artist.name}</MenuItem>)}
                     </Select>
                 </FormControl>
-                <Button style={{margin: 10}} variant="outlined" onClick={() => {
+                <Button style={{margin: 10, maxWidth: 100}} variant="outlined" onClick={() => {
                     this.props.addArtistToDisplayed(this.state.curArtistToDisplay); 
                     this.setState({
                         curArtistToDisplay: "",

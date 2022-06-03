@@ -51,13 +51,12 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
             <br></br>
             <Tabs centered>
                     {/* <Tab href="/" label = "Home" /> */}
-                    <Tab label = "Your Profile" to='/discoverpage/indivprofilepage' state={{id: user}} component={Link}/>
+                    <Tab label = "Your Profile" to='/indivuserprofile' component={Link}/>
                     <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Discover"/>
                     <Tab label = "Liked Songs" to='/savedsongs' component={Link}/>
                     <Tab label = "Top Songs" to='/topsongs' component={Link}/>
                     <Tab label = "Top Artists" to='/topartists' component={Link}/>
                     <Tab label = "Forum" to='/forumpage' component={Link}/>
-                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
             </Tabs>
             <br></br>
             <h2>Discover</h2>

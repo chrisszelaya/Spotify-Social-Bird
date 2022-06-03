@@ -74,7 +74,7 @@ function ForumPage(){
                     <Tab label = "Top Songs" to='/topsongs' component={Link}/>
                     <Tab label = "Top Artists" to='/topartists' component={Link}/>
                     <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}}label = "Forum"/>
-                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
+                    {/* <Tab label = "Inbox" to='/inboxpage' component={Link}/> */}
             </Tabs>
             <br></br>
             <Divider></Divider>
@@ -102,7 +102,7 @@ function ForumPage(){
             <Divider></Divider>
             <p className="miniheader">Create a new forum:</p>
             <Card >
-                <TextField multiline label="Topic" onChange={(e) => setTempTopic(e.target.value)} ></TextField>
+                <TextField fullWidth multiline label="Topic" onChange={(e) => setTempTopic(e.target.value)} ></TextField>
                 <Button onClick={()=> createNewForum(tempTopic)}>Create New Discussion</Button>
             </Card>
         </div>
