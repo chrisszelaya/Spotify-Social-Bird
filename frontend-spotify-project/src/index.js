@@ -8,7 +8,7 @@ import DiscoverPage from './Components/DiscoverPage';
 import LoginPage from './Components/LoginPage';
 import Login from './Components/Login';
 import ForumPage from './Components/ForumPage';
-import InboxPage from './Components/InboxPage';
+// import InboxPage from './Components/InboxPage';
 import SavedSongs from './Components/SavedSongs';
 import TopArtistsPage from './Components/TopArtistsPage';
 import TopSongsPage from './Components/TopSongsPage';
@@ -34,7 +34,7 @@ root.render(
       <Route path='/discoverpage/indivprofilepage' element={<IndivProfilePage/>}/>
       <Route path='/forumpage' element={<ForumPage/>}/>
       <Route path='/forumpage/indivforumpage' element={<IndivForumnPage/>}/>
-      <Route path='/inboxpage' element={<InboxPage/>}/>
+      {/* <Route path='/inboxpage' element={<InboxPage/>}/> */}
       <Route path='/loginpage' element={<LoginPage/>}/>
       <Route path='/userprofile' element={<UserProfile/>}/>
     </Routes>
