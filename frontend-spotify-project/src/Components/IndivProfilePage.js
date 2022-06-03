@@ -1,12 +1,26 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect,useContext} from "react"
 import { useLocation } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+// import { AccessTokenContext } from './AccessTokenContext';
+
 
 function IndivProfilePage(props){
     const location = useLocation();
     const USERNAME = location.state?.spotifyID;
     const [userInfo, setUserInfo] = useState(props.userInfo)
+
+    // const { token } = useContext(AccessTokenContext);
+    const [songs, setSongs] = useState([])
+
+
+    // https://api.spotify.com/v1/tracks/{id}
+    // useEffect(() => {
+    //     fetch("/tracks/"+ token)
+    //     .then(res => res.json())
+    //     .then(data => songs.push(data.item))
+    //    }, [])
+
     return(
         <div>
             <h1>Spotify Social</h1>

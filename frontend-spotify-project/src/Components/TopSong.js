@@ -1,50 +1,47 @@
 import React from 'react'
-import { IconButton, Paper, TextField, Typography,Grid,CardMedia,CardContent,Card } from '@mui/material';
-import { Box } from '@mui/system';
-//import DeleteIcon from '@mui/icons-material/Delete';
-//import EditIcon from '@mui/icons-material/Edit';
-//import { useState } from 'react'
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
+import axios from 'axios';
 
 function TopSong(props) {
-    const {trackName, artistName, coverPhoto} = props.sng;
 
-    return (
-        <Grid item xs={3}>
-            <Box style = {{
-                flex: '1',
-                padding:'20',
-                margin:'.25rem',
-                border: '15px solid white'
-            }}>
-                <Card sx={{ maxWidth: 200}}>
-                    <CardMedia
-                    component="img"
-                    height="140"
-                    alt="Album/song cover"
-                    image='https://image.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179856.jpg'
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                        {trackName}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                        By {artistName}
-                        </Typography>
-                    </CardContent>
-                </Card>
-                </Box>
-              </Grid>
-    )
+    const { name, artist, image, songid } = props
+    const pageID = "j48981HNmaNpshoSnIZz";
+
+
+    const addTopSongToDisplay = (song) => {
+        axios.put("http://localhost:9000/discoverpg/addSong/" + pageID + "/" + songid) 
+        .then((res) => {alert('Added!'); })
+    }
+    
+
+  return (
+    <Card sx={{ maxWidth: 200}}>
+        <CardMedia
+        component="img"
+        height="140"
+        alt="Album/song cover"
+        image={image}
+        />
+        <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+            {name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+            By {artist}
+            </Typography>
+        </CardContent>
+        <CardActions>
+                      <Button size="small" color="primary" type="submit" onClick={() => (addTopSongToDisplay(name, artist, image))}>
+                        Add To Displayed Songs
+                      </Button>
+        </CardActions>
+    </Card>
+  )
 }
 
-/*
-        <Paper>
-            <Box display='flex' alignItems='center' justifyContent='center'>
-            <div>
-                <Typography variant='h5'> {trackName} by {artistName}</Typography>
-                <Typography variant='h4'>{coverPhoto}</Typography>
-            </div>
-            </Box>          
-        </Paper>
-*/
-export default TopSong;
+export default TopSong
