@@ -12,6 +12,7 @@ import CardContent from '@mui/material/CardContent';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import {Link} from "react-router-dom";
+import SavedSong from './SavedSong';
 
 function SavedSongs() {
     
@@ -52,22 +53,7 @@ function SavedSongs() {
                             margin:'.25rem',
                             border: '15px solid white'
                         }}>
-                            <Card sx={{ maxWidth: 200}}>
-                                <CardMedia
-                                component="img"
-                                height="140"
-                                alt="Album/song cover"
-                                image={val.track.album.images[0] && val.track.album.images[0].url}
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                    {val.track.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                    By {val.track.artists[0].name}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
+                        <SavedSong name={val.track.name} artist={val.track.artists[0].name} image={val.track.album.images[0] && val.track.album.images[0].url} songid={val.track.id}/>
                         </Box>
                     </Grid>
                 
