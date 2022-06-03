@@ -13,7 +13,7 @@ import TrueHome from './Components/TrueHome'
 import DiscoverPage from './Components/DiscoverPage';
 import LoginPage from './Components/LoginPage';
 import ForumPage from './Components/ForumPage';
-import InboxPage from './Components/InboxPage';
+//import InboxPage from './Components/InboxPage';
 import UserProfile from './Components/UserProfile';
 import IndivProfilePage from './Components/IndivProfilePage';
 import IndivForumnPage from './Components/IndivForumPage';
@@ -32,7 +32,6 @@ function App() {
       <Route path='/discoverpage/indivprofilepage' element={<IndivProfilePage/>}/>
       <Route path='/forumpage' element={<ForumPage/>}/>
       <Route path='/forumpage/indivforumpage' element={<IndivForumnPage/>}/>
-      <Route path='/inboxpage' element={<InboxPage/>}/>
       <Route path='/loginpage' element={<LoginPage/>}/>
       <Route path='/userprofile' element={<UserProfile/>}/>
     </Routes>

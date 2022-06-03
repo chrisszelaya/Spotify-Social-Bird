@@ -99,8 +99,7 @@ function IndivForumnPage(props){
                     <Tab href="/likedsongs" label = "Liked Songs"/>
                     <Tab href="/topartists" label = "Top Artists"/>
                     <Tab href="/topsongs" label = "Top Songs"/>
-                    <Tab href="./" label = "Forumn"/>
-                    <Tab href="/inboxpage" label = "Inbox"/>
+                    <Tab href="./" label = "Forum"/>
             </Tabs> 
           
            <h2>{topic} </h2>

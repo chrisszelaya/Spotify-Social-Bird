@@ -23,8 +23,6 @@ function TrueHome() {
                 <br></br>
                 <Link to='/forumpage'>Forum Page</Link>
                 <br></br>
-                <Link to='/inboxpage'>Inbox Page</Link>
-                <br></br>
                 <Link to='/savedsongs'>Saved Songs</Link>
                 <br></br>
                 <Link to='/topartists'>Top Artists</Link>

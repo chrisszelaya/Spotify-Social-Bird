@@ -46,7 +46,6 @@ function TopArtistsPage() {
                     <Tab label = "Top Songs" to='/topsongs' component={Link}/>
                     <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Top Artists" />
                     <Tab label = "Forum" to='/forumpage' component={Link}/>
-                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
             </Tabs>
             <br></br>
             <Box

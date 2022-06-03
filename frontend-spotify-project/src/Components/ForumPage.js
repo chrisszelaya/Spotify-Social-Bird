@@ -74,7 +74,7 @@ function ForumPage(){
                     <Tab label = "Top Songs" to='/topsongs' component={Link}/>
                     <Tab label = "Top Artists" to='/topartists' component={Link}/>
                     <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}}label = "Forum"/>
-                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
+                    
             </Tabs>
             <br></br>
             <Divider></Divider>

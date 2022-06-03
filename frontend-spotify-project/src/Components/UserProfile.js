@@ -111,7 +111,6 @@ const UserProfile = (props) => {
                     <Tab label = "Top Songs" to='/topsongs' component={Link}/>
                     <Tab label = "Top Artists" to='/topartists' component={Link}/>
                     <Tab label = "Forum" to='/forumpage' component={Link}/>
-                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
             </Tabs>
             <div style={{alignItems: "center", textAlign: "center"}}>
                 <h1 style={{textAlign: "left", margin: 25, marginLeft: 60, fontSize: 46}}>{username}'s Profile (yours)</h1>

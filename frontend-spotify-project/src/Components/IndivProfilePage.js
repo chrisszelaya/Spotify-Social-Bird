@@ -35,7 +35,6 @@ function IndivProfilePage(props){
                     <Tab label = "Top Songs" to='/topsongs' component={Link}/>
                     <Tab label = "Top Artists" to='/topartists' component={Link}/>
                     <Tab label = "Forum" to='/forumpage' component={Link}/>
-                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
             </Tabs>
             <UserProfile id={location.state?.id} />
            {console.log(location.state)}
