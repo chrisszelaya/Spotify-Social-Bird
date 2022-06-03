@@ -88,10 +88,11 @@ const LogIn=()=>{
     const login= async(e)=>{
         e.preventDefault();
         try{
-
+            console.log("test)")
             const hi = signInWithEmailAndPassword(auth,email,password).then((d) => {
                 fetch("http://localhost:9000/login/userFromEmail/" + email).then((res) => res.json()).then((text) => {
                     setUser(text.id);
+                    console.log(text.id); 
                     navigate("../truehome");
                 })
             })

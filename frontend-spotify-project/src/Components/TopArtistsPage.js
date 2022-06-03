@@ -11,7 +11,10 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import { ToggleButton } from '@mui/material';
 import { ToggleButtonGroup } from '@mui/material';
-import "./TopArtist.css"
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import {Link} from "react-router-dom";
+import TopArtist from './TopArtist';
 
 function TopArtistsPage() {
     
@@ -34,6 +37,18 @@ function TopArtistsPage() {
             <Typography className="h2">
               Your Top Artists
             </Typography>
+            <br></br>
+            <Tabs centered>
+                    {/* <Tab href="/" label = "Home" /> */}
+                    <Tab label = "Your Profile" to='/userprofile' component={Link}/>
+                    <Tab label = "Discover"  to='/discoverpage' component={Link}/>
+                    <Tab label = "Liked Songs" to='/savedsongs' component={Link}/>
+                    <Tab label = "Top Songs" to='/topsongs' component={Link}/>
+                    <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Top Artists" />
+                    <Tab label = "Forum" to='/forumpage' component={Link}/>
+                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
+            </Tabs>
+            <br></br>
             <Box
                 m={1}
                 //margin
@@ -43,6 +58,7 @@ function TopArtistsPage() {
             >            
             <ToggleButtonGroup 
                 color="primary"
+                fullWidth
                 value={alignment}
                 exclusive
                 onChange={handleChange}
@@ -52,6 +68,7 @@ function TopArtistsPage() {
                 <ToggleButton value="alltime">All Time</ToggleButton>
             </ToggleButtonGroup>
             </Box>
+            <br></br>
             <Grid container>
             {topartists.length > 0 && 
                 topartists.map((val, key) => 
@@ -62,19 +79,8 @@ function TopArtistsPage() {
                             margin:'.25rem',
                             border: '15px solid white'
                         }}>
-                            <Card sx={{ maxWidth: 200}}>
-                                <CardMedia
-                                component="img"
-                                height="160"
-                                alt="No Artist Photo Found"
-                                image={(val.images[0] && val.images[0].url) || 'https://image.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179856.jpg'}
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                    {val.name}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
+                        <TopArtist name={val.name} image={(val.images[0] && val.images[0].url) || 'https://image.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179856.jpg'} artistid={val.id}/>
+
                         </Box>
                     </Grid>
                 

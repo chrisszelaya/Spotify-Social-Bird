@@ -9,6 +9,9 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import {Link} from "react-router-dom";
 
 function SavedSongs() {
     
@@ -27,6 +30,18 @@ function SavedSongs() {
             <Typography variant="h2">
                 your liked songs
             </Typography>
+            <br></br>
+            <Tabs centered>
+                    {/* <Tab href="/" label = "Home" /> */}
+                    <Tab label = "Your Profile" to='/userprofile' component={Link}/>
+                    <Tab label = "Discover"  to='/discoverpage' component={Link}/>
+                    <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Liked Songs"/>
+                    <Tab label = "Top Songs" to='/topsongs' component={Link}/>
+                    <Tab label = "Top Artists" to='/topartists' component={Link}/>
+                    <Tab label = "Forum" to='/forumpage' component={Link}/>
+                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
+            </Tabs>
+            <br></br>
             <Grid container>
             {songs.length > 0 && 
                 songs.map((val, key) => 

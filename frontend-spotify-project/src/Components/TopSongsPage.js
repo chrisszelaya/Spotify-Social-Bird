@@ -12,6 +12,9 @@ import CardContent from '@mui/material/CardContent';
 import { ToggleButton } from '@mui/material';
 import { ToggleButtonGroup } from '@mui/material';
 import TopSong from './TopSong';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import {Link} from "react-router-dom";
 
 function TopSongsPage() {
     
@@ -34,6 +37,18 @@ function TopSongsPage() {
             <Typography variant="h2">
                 your top songs
             </Typography>
+            <br></br>
+            <Tabs centered>
+                    {/* <Tab href="/" label = "Home" /> */}
+                    <Tab label = "Your Profile" to='/userprofile' component={Link}/>
+                    <Tab label = "Discover"  to='/discoverpage' component={Link}/>
+                    <Tab label = "Liked Songs" to='/savedsongs' component={Link}/>
+                    <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Top Songs" />
+                    <Tab label = "Top Artists" to='/topartists' component={Link}/>
+                    <Tab label = "Forum" to='/forumpage' component={Link}/>
+                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
+            </Tabs>
+            <br></br>
             <Box
                 m={1}
                 //margin
@@ -43,6 +58,7 @@ function TopSongsPage() {
             >            
             <ToggleButtonGroup 
                 color="primary"
+                fullWidth
                 value={alignment}
                 exclusive
                 onChange={handleChange}
@@ -52,6 +68,7 @@ function TopSongsPage() {
                 <ToggleButton value="alltime">All Time</ToggleButton>
             </ToggleButtonGroup>
             </Box>
+            <br></br>
             <Grid container>
             {topsongs.length > 0 && 
                 topsongs.map((val, key) => 

@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import UserProfile from "./UserProfile.js"
 import { AccessTokenContext } from './AccessTokenContext';
+import {Link} from "react-router-dom";
 
 
 function IndivProfilePage(props){
@@ -28,13 +29,13 @@ function IndivProfilePage(props){
             <h1>Spotify Social</h1>
             <Tabs centered>
                     {/* <Tab href="/" label = "Home" /> */}
-                    <Tab href="./userprofile" label = "Your Profile"/>
-                    <Tab href='./' label = "Discover"/>
-                    <Tab href="./likedsongs" label = "Liked Songs"/>
-                    <Tab href="./topartists" label = "Top Artists"/>
-                    <Tab href="./topsongs" label = "Top Songs"/>
-                    <Tab href="./forumnpage" label = "Forumn"/>
-                    <Tab href="./inboxpage" label = "Inbox"/>
+                    <Tab label = "Your Profile" to='/discoverpage/indivprofilepage' state={{id: user}} component={Link}/>
+                    <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Discover"/>
+                    <Tab label = "Liked Songs" to='/savedsongs' component={Link}/>
+                    <Tab label = "Top Songs" to='/topsongs' component={Link}/>
+                    <Tab label = "Top Artists" to='/topartists' component={Link}/>
+                    <Tab label = "Forum" to='/forumpage' component={Link}/>
+                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
             </Tabs>
             <UserProfile id={location.state?.id} />
            {console.log(location.state)}

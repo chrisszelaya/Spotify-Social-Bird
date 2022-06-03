@@ -9,7 +9,7 @@ import { common } from "@mui/material/colors";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import "./DiscoverPage.css"
+import { Typography } from "@mui/material";
 
 function ForumPage(){
     const [allForums, setAllForums] = useState([]);
@@ -62,17 +62,21 @@ function ForumPage(){
     }
     return(
         <div>
-            <Tabs className="tabs" centered>
+            <Typography variant="h2">
+                forum
+            </Typography>
+            <br></br>
+            <Tabs centered>
                     {/* <Tab href="/" label = "Home" /> */}
-                    <Tab href="./userprofile" label = "Your Profile"/>
-                    <Tab href="./discoverpage" label = "Discover"/>
-                    <Tab href="./likedsongs" label = "Liked Songs"/>
-                    <Tab href="./topartists" label = "Top Artists"/>
-                    <Tab href="./topsongs" label = "Top Songs"/>
+                    <Tab label = "Your Profile" to='/userprofile' component={Link}/>
+                    <Tab label = "Discover" to='/discoverpage' component={Link}/>
+                    <Tab label = "Liked Songs" to='/savedsongs' component={Link}/>
+                    <Tab label = "Top Songs" to='/topsongs' component={Link}/>
+                    <Tab label = "Top Artists" to='/topartists' component={Link}/>
                     <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}}label = "Forum"/>
-                    <Tab href="./inboxpage" label = "Inbox"/>
+                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
             </Tabs>
-            <h1 className="discover">Forumns</h1>
+            <br></br>
             <Divider></Divider>
             {/* <Box display="flex" flexDirection="row">
                 <Box flexGrow={0}>
