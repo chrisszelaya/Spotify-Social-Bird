@@ -11,7 +11,7 @@ const UserProfile = () => {
     console.log(user)
 
     const getUserInfo = (userID) => {
-        fetch("http://localhost:9000/discoverpg/allUserInfo/" + userID)
+        fetch("http://localhost:9000/discoverpg/userInfo/" + userID)
         .then((res) => res.json())
         .then((text) => {setUserInfo(text)})
     }
@@ -21,10 +21,15 @@ const UserProfile = () => {
         .then((res) => res.json())
         .then((data) => window.open(data.url))
     }
+
+    const getTopArtists = () => {
+        fetch("http://localhost:9000/topartists/year?token=" + token).then((res) => {res.json()}).then((data) => console.log(data))
+    }
+
     
     useEffect(() => {
         getUserInfo("j48981HNmaNpshoSnIZz");
-        
+        getTopArtists(); 
       }, [])
 
     if(userInfo) {
@@ -58,6 +63,7 @@ const UserProfile = () => {
         .then((res) => {getUserInfo(pageID); })
     }
 
+    
     if(myPage) {
         console.log(userInfo)
         let topSongsNotInDisplayed = []; 
