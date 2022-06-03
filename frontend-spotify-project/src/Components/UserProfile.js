@@ -155,7 +155,6 @@ const UserProfile = (props) => {
                 <h2>Displayed Artists</h2>
                 {displayedTopArtistsIDs.map((id) => <ArtistCard key={id} id={id} token={token} myPage={false}/>)}
                 </header>
-                <button onClick={() => getSpotifyInfo("j48981HNmaNpshoSnIZz")}>login</button>
             </div>
         );
     }
