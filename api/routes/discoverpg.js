@@ -11,10 +11,10 @@ router.get("/allUserInfo", async (req, res, next) => {
   // res.send(,result);
 })
 
-router.get("/allUserInfo/:id", async (req, res, next) => {
-  getDoc(doc(db, "users", req.params.id))
-  .then((doc) => {res.send(doc.data())})
-})
+// router.get("/allUserInfo/:id", async (req, res, next) => {
+//   getDoc(doc(db, "users", req.params.id))
+//   .then((doc) => {res.send(doc.data())})
+// })
 
 router.put("/addSong/:userID/:songID", (req, res, next) => {
   const newRef = doc(db, "users", req.params.userID);
