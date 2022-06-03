@@ -16,6 +16,7 @@ import { Typography } from '@mui/material';
 import { common } from "@mui/material/colors";
 import { AccessTokenContext } from "./AccessTokenContext";
 import { getThemeProps } from "@mui/system";
+import "./DiscoverPage.css"
 
 function DiscoverPage(){
     const {user, setUser, setAccessToken} = useContext(AccessTokenContext); 
@@ -46,9 +47,7 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
 
 </Link> */}
             {/* /allUserInfo */}
-            <Typography variant="h2">
-                discover
-            </Typography>
+
             <br></br>
             <Tabs centered>
                     {/* <Tab href="/" label = "Home" /> */}
