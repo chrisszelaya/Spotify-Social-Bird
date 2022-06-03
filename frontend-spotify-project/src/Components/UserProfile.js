@@ -5,14 +5,11 @@ import {AccessTokenContext} from "./AccessTokenContext"
 
 const UserProfile = (props) => {
     const pageID = props.id;
-    console.log(props);
     //state
     const [userInfo, setUserInfo] = useState(); 
     const [topArtists, setTopArtists] = useState(); 
     const [topSongs, setTopSongs] = useState(); 
     const { token, setAccessToken, user, setUser } = useContext(AccessTokenContext);
-    console.log(token)
-    console.log(user)
 
     const getUserInfo = (userID) => {
         fetch("http://localhost:9000/discoverpg/userInfo/" + userID)
@@ -82,9 +79,12 @@ const UserProfile = (props) => {
         .then((res) => {getUserInfo(pageID); })
     }
 
+    const flipPrivacy = () => {
+        axios.put("http://localhost:9000/discoverpg/setPrivacy/" + pageID).then((res) => getUserInfo(pageID) )
+    }
+
     
     if(myPage) {
-        console.log(userInfo)
         let topSongsNotInDisplayed = []; 
         for(let x = 0; x < allTopSongsIDs.length; x++) {
             if(!displayedTopSongsIDs.includes(allTopSongsIDs[x])) {
@@ -92,7 +92,6 @@ const UserProfile = (props) => {
             }
         }
         let topArtistsNotInDisplayed = []; 
-        console.log(userInfo.displayedArtistIDs)
         for(let x = 0; x < allTopArtistsIDs.length; x++) {
             if(!displayedTopArtistsIDs.includes(allTopArtistsIDs[x])) {
                 topArtistsNotInDisplayed.push(allTopArtistsIDs[x]); 
@@ -114,7 +113,7 @@ const UserProfile = (props) => {
                 <h4 style={{textAlign: "left"}}>Add a new artist to display: </h4>
                 <AddNewArtist token={token} topArtistsNotInDisplayed={topArtistsNotInDisplayed} addArtistToDisplayed={addArtistToDisplayed}/>
                 </header>
-                <button onClick={() => getSpotifyInfo("j48981HNmaNpshoSnIZz")}>login</button>
+                <Button style={{margin: 15, marginRight: 40}} variant="outlined" onClick={() => {flipPrivacy()}}>Make Page {privatePage ? "Public" : "Private"}</Button>
             </div>
         );
     }
@@ -176,7 +175,6 @@ class ArtistCard extends React.Component {
     }
     render() {
         if(this.state.artistData) {
-            console.log(this.state.artistData)
             if(this.props.myPage){
         return(
             <div style={{display: "flex", alignItems: "center", justifyContent: "center", margin: 15, }}>
@@ -263,23 +261,19 @@ class AddNewSong extends React.Component {
             console.log(this.state.runningCounter < this.props.topSongsNotInDisplayed.length)
             console.log(this.state.runningCounter==this.state.songArray.length)
             if(this.props.token && this.state.runningCounter < this.props.topSongsNotInDisplayed.length && this.state.runningCounter==this.state.songArray.length) {
-                console.log("456")
                 const x = this.state.runningCounter;
                 fetch("http://localhost:9000/spotify/getSong?songID=" + this.props.topSongsNotInDisplayed[x] + "&token=" + this.props.token)
                 .then((res) => res.json()).then((data) => {
-                    console.log(data); 
                     let newVar = {
                         id: this.props.topSongsNotInDisplayed[x], 
                         name: data.name + " by " + data.artists[0].name,
                     }
-                    console.log(newVar)
                     let newArray = this.state.songArray; 
                     newArray[x] = newVar; 
                     this.setState({
                         runningCounter: x+1,
                         songArray: newArray
                     })
-                    console.log("pushed a new song to new array!")
                 })
             }
 
@@ -298,7 +292,6 @@ class AddNewArtist extends React.Component {
     }
     render() {
         if(this.state.runningCounter >= this.props.topArtistsNotInDisplayed.length) {
-            console.log(this.state.artistArray)
             let nonStateArtistArray = []; 
             for(let x =0; x < this.state.artistArray.length; x++) {
                 if((this.state.artistArray[x].id && this.state.artistArray[x].name))
@@ -331,9 +324,7 @@ class AddNewArtist extends React.Component {
         );
         }
         else {
-        console.log(this.state.runningCounter)
         if(this.props.token && this.state.runningCounter < this.props.topArtistsNotInDisplayed.length && this.state.runningCounter==this.state.artistArray.length) {
-            console.log(this.props.topArtistsNotInDisplayed.length)
             const x = this.state.runningCounter;
             fetch("http://localhost:9000/spotify/getArtist?artistID=" + this.props.topArtistsNotInDisplayed[x] + "&token=" + this.props.token)
             .then((res) => res.json()).then((data) => {
@@ -347,11 +338,7 @@ class AddNewArtist extends React.Component {
                     runningCounter: x+1,
                     artistArray: newArray
                 })
-                console.log("pushed a new artist to new array!")
             })
-        }
-        else{
-            console.log(this.state.artistArray)
         }
     }
     }
