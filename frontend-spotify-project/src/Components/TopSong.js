@@ -6,15 +6,18 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import axios from 'axios';
+import { AccessTokenContext } from './AccessTokenContext';
+import { useContext } from 'react';
 
 function TopSong(props) {
 
-    const { name, artist, image, songid } = props
-    const pageID = "j48981HNmaNpshoSnIZz";
+    const { name, artist, image, songid} = props
+    const { user } = useContext(AccessTokenContext);
+    //const pageID = "j48981HNmaNpshoSnIZz";
 
 
     const addTopSongToDisplay = (song) => {
-        axios.put("http://localhost:9000/discoverpg/addSong/" + pageID + "/" + songid) 
+        axios.put("http://localhost:9000/discoverpg/addSong/" + user + "/" + songid) 
         .then((res) => {alert('Added!'); })
     }
     

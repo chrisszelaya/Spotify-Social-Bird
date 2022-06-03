@@ -14,6 +14,7 @@ import { ToggleButtonGroup } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import {Link} from "react-router-dom";
+import TopArtist from './TopArtist';
 
 function TopArtistsPage() {
     
@@ -78,19 +79,8 @@ function TopArtistsPage() {
                             margin:'.25rem',
                             border: '15px solid white'
                         }}>
-                            <Card sx={{ maxWidth: 200}}>
-                                <CardMedia
-                                component="img"
-                                height="160"
-                                alt="No Artist Photo Found"
-                                image={(val.images[0] && val.images[0].url) || 'https://image.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179856.jpg'}
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                    {val.name}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
+                        <TopArtist name={val.name} image={(val.images[0] && val.images[0].url) || 'https://image.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179856.jpg'} artistid={val.id}/>
+
                         </Box>
                     </Grid>
                 
