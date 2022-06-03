@@ -17,6 +17,7 @@ import UserProfile from './Components/UserProfile';
 import IndivProfilePage from './Components/IndivProfilePage';
 import IndivForumnPage from './Components/IndivForumPage';
 import AccessTokenProvider from './Components/AccessTokenContext';
+import IndivUserProfile from './Components/IndivUserProfile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
     <Routes>
     <Route path='/' element={<Login/>}/> 
       <Route path='/truehome' element={<TrueHome/>}/> 
+      <Route path='/indivuserprofile' element={<IndivUserProfile/>}/> 
       <Route path='/topsongs' element={<TopSongsPage/>}/>
       <Route path='/topartists' element={<TopArtistsPage/>}/>
       <Route path='/savedsongs' element={<SavedSongs/>}/>
