@@ -7,11 +7,12 @@ import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import {Link} from "react-router-dom";
 import ChatIcon from '@mui/icons-material/Chat';
 // import {indivProfileCard} from './pagecss';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import {Link} from "react-router-dom";
+import { Typography } from '@mui/material';
 import { common } from "@mui/material/colors";
 
 function DiscoverPage(){
@@ -41,16 +42,18 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
 
 </Link> */}
             {/* /allUserInfo */}
-            <h1>Spotify Social</h1>
+            <Typography variant="h2">
+                discover
+            </Typography>
             <Tabs centered>
                     {/* <Tab href="/" label = "Home" /> */}
-                    <Tab href="./userprofile" label = "Your Profile"/>
+                    <Tab label = "Your Profile" to='/userprofile' component={Link}/>
                     <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Discover"/>
-                    <Tab href="./likedsongs" label = "Liked Songs"/>
-                    <Tab href="./topartists" label = "Top Artists"/>
-                    <Tab href="./topsongs" label = "Top Songs"/>
-                    <Tab href="./forumpage" label = "Forum"/>
-                    <Tab href="./inboxpage" label = "Inbox"/>
+                    <Tab label = "Liked Songs" to='/savedsongs' component={Link}/>
+                    <Tab label = "Top Songs" to='/topsongs' component={Link}/>
+                    <Tab label = "Top Artists" to='/topartists' component={Link}/>
+                    <Tab label = "Forum" to='/forumpage' component={Link}/>
+                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
             </Tabs>
             <h2>Discover</h2>
             {/* Tabs to the rest of the pages */}

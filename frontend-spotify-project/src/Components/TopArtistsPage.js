@@ -11,6 +11,9 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import { ToggleButton } from '@mui/material';
 import { ToggleButtonGroup } from '@mui/material';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import {Link} from "react-router-dom";
 
 function TopArtistsPage() {
     
@@ -33,6 +36,18 @@ function TopArtistsPage() {
             <Typography variant="h2">
                 your top artists
             </Typography>
+            <br></br>
+            <Tabs centered>
+                    {/* <Tab href="/" label = "Home" /> */}
+                    <Tab label = "Your Profile" to='/userprofile' component={Link}/>
+                    <Tab label = "Discover"  to='/discoverpage' component={Link}/>
+                    <Tab label = "Liked Songs" to='/savedsongs' component={Link}/>
+                    <Tab label = "Top Songs" to='/topsongs' component={Link}/>
+                    <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Top Artists" />
+                    <Tab label = "Forum" to='/forumpage' component={Link}/>
+                    <Tab label = "Inbox" to='/inboxpage' component={Link}/>
+            </Tabs>
+            <br></br>
             <Box
                 m={1}
                 //margin
@@ -42,6 +57,7 @@ function TopArtistsPage() {
             >            
             <ToggleButtonGroup 
                 color="primary"
+                fullWidth
                 value={alignment}
                 exclusive
                 onChange={handleChange}
@@ -51,6 +67,7 @@ function TopArtistsPage() {
                 <ToggleButton value="alltime">All Time</ToggleButton>
             </ToggleButtonGroup>
             </Box>
+            <br></br>
             <Grid container>
             {topartists.length > 0 && 
                 topartists.map((val, key) => 
