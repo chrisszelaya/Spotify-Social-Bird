@@ -93,7 +93,7 @@ const LogIn=()=>{
                 fetch("http://localhost:9000/login/userFromEmail/" + email).then((res) => res.json()).then((text) => {
                     setUser(text.id);
                     console.log(text.id); 
-                    navigate("../truehome");
+                    navigate("../discoverpage");
                 })
             })
 
