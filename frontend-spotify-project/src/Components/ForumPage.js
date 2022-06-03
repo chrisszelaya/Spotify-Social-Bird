@@ -7,7 +7,7 @@ import AppBar from '@mui/material/AppBar';
 import Divider from '@mui/material/Divider';
 import Card from '@mui/material/Card';
 import {Link} from "react-router-dom";
-import { common } from "@material-ui/core/colors";
+import { common } from "@mui/material/colors";
 import { getFirestore, collection, addDoc, doc, getDocs, updateDoc, increment } from "firebase/firestore";
 
 function ForumPage(){

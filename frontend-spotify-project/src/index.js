@@ -12,6 +12,7 @@ import InboxPage from './Components/InboxPage';
 import SavedSongs from './Components/SavedSongs';
 import TopArtistsPage from './Components/TopArtistsPage';
 import TopSongsPage from './Components/TopSongsPage';
+import TrueHome from "./Components/TrueHome"
 import UserProfile from './Components/UserProfile';
 import IndivProfilePage from './Components/IndivProfilePage';
 import IndivForumnPage from './Components/IndivForumPage';

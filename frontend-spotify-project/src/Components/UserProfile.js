@@ -3,7 +3,7 @@ import {FormControl, Select, InputLabel, MenuItem, Button} from "@mui/material";
 import axios from "axios"
 import {AccessTokenContext} from "./AccessTokenContext"
 
-function UserProfile() {
+const UserProfile = () => {
     //state
     const [userInfo, setUserInfo] = useState(); 
     const { token, setAccessToken, user, setUser } = useContext(AccessTokenContext);
