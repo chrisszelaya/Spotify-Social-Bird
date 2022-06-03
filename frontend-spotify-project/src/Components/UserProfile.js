@@ -6,6 +6,8 @@ import {AccessTokenContext} from "./AccessTokenContext"
 const UserProfile = () => {
     //state
     const [userInfo, setUserInfo] = useState(); 
+    const [topArtists, setTopArtists] = useState(); 
+    const [topSongs, setTopSongs] = useState(); 
     const { token, setAccessToken, user, setUser } = useContext(AccessTokenContext);
     console.log(token)
     console.log(user)
@@ -23,23 +25,39 @@ const UserProfile = () => {
     }
 
     const getTopArtists = () => {
-        fetch("http://localhost:9000/topartists/year?token=" + token).then((res) => {res.json()}).then((data) => console.log(data))
+        fetch("http://localhost:9000/topartists/year?token=" + token).then((res) => (res.json())).then((data) => {
+            let array = []; 
+            for(let x = 0; x < 10; x++) {
+                array.push(data.items[x].id);
+            }
+            setTopArtists(array); 
+        })
     }
 
-    
+    const getTopSongs = () => {
+        fetch("http://localhost:9000/topsongs/year?token=" + token).then((res) => (res.json())).then((data) => {
+            let array = []; 
+            for(let x = 0; x < 10; x++) {
+                array.push(data.items[x].id);
+            }
+            setTopSongs(array); 
+        })
+    }
+
     useEffect(() => {
         getUserInfo("j48981HNmaNpshoSnIZz");
         getTopArtists(); 
+        getTopSongs(); 
       }, [])
 
-    if(userInfo) {
+    if(userInfo && topArtists && topSongs) {
     const curUserID = user; 
     const pageID = "j48981HNmaNpshoSnIZz";
     const username = userInfo.username; 
     const privatePage = userInfo.private; 
     const myPage = (curUserID == pageID) ? true : false
-    const allTopArtistsIDs = ["0c173mlxpT3dSFRgMO8XPh", "6l3HvQ5sa6mXTsMTB19rO5", "6AgTAQt8XS6jRWi4sX7w49", "757aE44tKEUQEqRuT6GnEB", "4DdkRBBYG6Yk9Ka8tdJ9BW"];
-    const allTopSongsIDs = ["7zvfDihYiJ8RQ1nRcpKBF5", "6EDO9iiTtwNv6waLwa1UUq", "4QqTDl0Po7cbaZMcGsZmBg", "1yxgsra98r3qAtxqiGZPiX", "3iVcZ5G6tvkXZkZKlMpIUs"]; 
+    const allTopArtistsIDs = topArtists;
+    const allTopSongsIDs = topSongs; 
     const displayedTopArtistsIDs = userInfo.displayedArtistIDs; 
     const displayedTopSongsIDs = userInfo.displayedSongIDs; 
 

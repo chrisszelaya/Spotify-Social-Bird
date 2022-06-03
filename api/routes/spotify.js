@@ -8,7 +8,7 @@ const clientID = "e4b057a237fc49dc8253f12b03df1aa2";
 const client_secret = "95828c0ad9fc46029d4528d017cc18ec";
 
 router.get("/user", (req, res, next) => {
-    const scope = "user-read-private"; 
+    const scope = "user-read-private user-top-read user-library-read"; 
     console.log("hi")
     res.status(200).json({url: 'https://accounts.spotify.com/authorize?response_type=code&client_id=' + clientID + "&scope=" + scope + "&redirect_uri=" + redirect_uri})
 })
