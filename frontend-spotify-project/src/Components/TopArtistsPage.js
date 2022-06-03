@@ -11,6 +11,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import { ToggleButton } from '@mui/material';
 import { ToggleButtonGroup } from '@mui/material';
+import "./TopArtist.css"
 
 function TopArtistsPage() {
     
@@ -30,8 +31,8 @@ function TopArtistsPage() {
     console.log(topartists)
     return (
         <div>
-            <Typography variant="h2">
-                your top artists
+            <Typography className="h2">
+              Your Top Artists
             </Typography>
             <Box
                 m={1}

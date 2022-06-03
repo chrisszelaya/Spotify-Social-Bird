@@ -13,6 +13,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { common } from "@mui/material/colors";
+import "./DiscoverPage.css"
 
 function DiscoverPage(){
     const [allInfo, setAllInfo] = useState([]);
@@ -32,7 +33,7 @@ function DiscoverPage(){
       }, [])
     
     return(
-        <div>
+        <div className="main">
             {/* <Link to='AdminClassPage' state={{ className: c.name, classID: c.id, teacherName: c.teacher}}>
 
 <Button
@@ -41,32 +42,35 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
 
 </Link> */}
             {/* /allUserInfo */}
-            <h1>Spotify Social</h1>
-            <Tabs centered>
+            <Tabs className="tabs" centered>
                     {/* <Tab href="/" label = "Home" /> */}
-                    <Tab href="./userprofile" label = "Your Profile"/>
-                    <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Discover"/>
-                    <Tab href="./likedsongs" label = "Liked Songs"/>
-                    <Tab href="./topartists" label = "Top Artists"/>
-                    <Tab href="./topsongs" label = "Top Songs"/>
-                    <Tab href="./forumpage" label = "Forum"/>
-                    <Tab href="./inboxpage" label = "Inbox"/>
+                    <Tab className="tab" href="./userprofile" label = "Your Profile"/>
+                    <Tab className="tab" style={{fontWeight:'bold',textDecorationLine:'underline'}} label = "Discover"/>
+                    <Tab className="tab" href="./likedsongs" label = "Liked Songs"/>
+                    <Tab className="tab" href="./topartists" label = "Top Artists"/>
+                    <Tab className="tab" href="./topsongs" label = "Top Songs"/>
+                    <Tab className="tab" href="./forumpage" label = "Forum"/>
+                    <Tab className="tab" href="./inboxpage" label = "Inbox"/>
             </Tabs>
-            <h2>Discover</h2>
+            <h1>Discover users</h1>
             {/* Tabs to the rest of the pages */}
             {/* iterate through all the users in docs to display*/}
             {/* each user is their own card -> use card media in indivProfilePage to click */}
             {/* <Grid container spacing ={3}> */}
             {allInfo && allInfo.map((item) => 
             // id = {item.id} id:item.id,...item.data
+            <div className="Wrapper">
+            <div className="card">
+
             <Card key = {item.id} style = {indivProfileCard}>
                 {console.log(item)}
                 <Link to ='indivprofilepage' state={{id:item.id,spotifyID:item.spotifyID, username:item.username}} style={{textDecoration:'none',color:common.black}}>
                 {/* <CardActionArea component={Link} to={{pathname:'indivprofilepage', state:{id: item.id }}}> */}
-                <h2>Username: {item.username}</h2>
+                <h2 className="card__t">Username: {item.username}</h2>
                 {/* <IndivProfilePage/> */}
+       
                 <Grid container spacing ={2}>
-                    <Grid item xs>
+                    <Grid className="imageFrame" item xs>
                         <CardMedia
                             style={{
                                 width: "auto",
@@ -77,11 +81,11 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
                             image='https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png'
                             />
                     </Grid>
-                    <Grid item xs>
+                    <Grid  item xs>
                         
-                        <h4>SpotifyId: {item.spotifyID}</h4>
-                        <h4>Top Artist: </h4>
-                        <h4>Top Song: </h4>
+                        <h4 className="card__title">Id: {item.spotifyID}</h4>
+                        <h4 className="card__title">Top Artist:  </h4>
+                        <h4 className="card__title">Top Song: </h4>
                     </Grid>
                 </Grid>
                 {/* </CardActionArea> */}
@@ -92,9 +96,13 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
                     </Button>
                 </CardActions>
             </Card>
+            </div>
+            </div>
+    
             
             )}
              {/* </Grid> */}
+             
         </div>
     );
 }export default DiscoverPage;

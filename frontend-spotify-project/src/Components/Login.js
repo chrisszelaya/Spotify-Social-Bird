@@ -8,6 +8,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import {useNavigate} from "react-router-dom"
 import {AccessTokenContext} from "./AccessTokenContext"
 import axios from 'axios';
+import Bird from './image/bird.PNG'
 
 
 const LogIn=()=>{
@@ -110,7 +111,11 @@ const LogIn=()=>{
     if(!accountCreationScreen) {
     return (
         <nav className='Spotify'>
-            <div className='Title'>Spotify 
+            <div className="header">
+            <img className='Logo' src={Bird} ></img>
+            <div className='Title'>Social Song Bird
+            
+            </div>
             </div>
         <div className='login-form'>
             <h1>Log In</h1>
@@ -126,7 +131,7 @@ const LogIn=()=>{
                 <span className='input-icon'><i className="fa fa-envelope"><LockIcon/></i></span>
                 </div>
                 <button onClick={login} className='login-btn'>Sign In</button>
-                <a className='signup' href="#">Don't have an account ?</a>
+                <p></p>
                 <button onClick={register} className='login-btn'>Create an Account</button>
                 <p>{statusText}</p>
         </div>
@@ -140,9 +145,6 @@ const LogIn=()=>{
                     console.log(e.target.value); 
                     setUsernameForm(e.target.value); 
                 }}}/>
-                </div>
-                <div className='form-group'>
-                <input type="text" placeholder="Enter Spotify ID" value={spotifyID} onChange={(e)=>{setSpotifyID(e.target.value)}}/>
                 </div>
                 <button onClick={updateAccount} className='login-btn'>Create</button>
             </div>

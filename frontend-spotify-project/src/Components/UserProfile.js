@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import {FormControl, Select, InputLabel, MenuItem, Button} from "@mui/material";
 import axios from "axios"
 import {AccessTokenContext} from "./AccessTokenContext"
+import { orange } from '@mui/material/colors';
 
 const UserProfile = () => {
     //state
@@ -29,7 +30,7 @@ const UserProfile = () => {
     
     useEffect(() => {
         getUserInfo("j48981HNmaNpshoSnIZz");
-        getTopArtists(); 
+        //getTopArtists(); 
       }, [])
 
     if(userInfo) {
