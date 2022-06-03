@@ -91,8 +91,7 @@ function ForumPage(){
                 </Box>
                 <h1>Forums</h1>
             </Box> */}
-            <h2>Forumns</h2>
-            <p>Browse forumns:</p>
+            <p className="miniheader">Browse forumns:</p>
             {allForums && allForums.map((item) => 
             <Card style ={postBox}key = {item.id}>
                 <Link to ='indivforumpage'state={{id:item.id,posts:item.posts,author:item.author,topic:item.topic}} style={{textDecoration:'none',color:common.black}}>
@@ -101,7 +100,7 @@ function ForumPage(){
             </Card>
             )}
             <Divider></Divider>
-            <p>Create a new forum:</p>
+            <p className="miniheader">Create a new forum:</p>
             <Card >
                 <TextField fullWidth multiline label="Topic" onChange={(e) => setTempTopic(e.target.value)} ></TextField>
                 <Button onClick={()=> createNewForum(tempTopic)}>Create New Discussion</Button>

@@ -34,8 +34,8 @@ function TopArtistsPage() {
     console.log(topartists)
     return (
         <div>
-            <Typography variant="h2">
-                your top artists
+            <Typography className="h2">
+              Your Top Artists
             </Typography>
             <br></br>
             <Tabs centered>

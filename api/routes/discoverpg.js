@@ -96,6 +96,24 @@ router.get("/userInfo/:id", async (req, res, next) => {
   getDoc(doc(db, "users", req.params.id))
   .then((doc) => {res.send(doc.data())})
 })
+
+router.put("/setPrivacy/:userID", async (req, res, next) => {
+  const newRef = doc(db, "users", req.params.userID);
+  getDoc(newRef)
+    .then((doc) =>{
+      console.log(doc.data())
+      if(doc.data().private) {
+        updateDoc(newRef, {
+            private: false,
+        }).then(res.send("success"))
+      }
+      else {
+        updateDoc(newRef, {
+          private: true,
+      }).then(res.send("success"))
+      }
+    })
+})
 // router.put("/edit",(req,res,next) =>{
 //   // console.log(req.body)
 //   updateDoc(doc(db,"posts", req.body.messageId),{
