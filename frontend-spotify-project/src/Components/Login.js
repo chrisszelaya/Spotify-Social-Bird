@@ -18,7 +18,7 @@ const LogIn=()=>{
     const [spotifyID, setSpotifyID] = useState(""); 
     const [statusText, setStatusText] = useState(""); 
     const [accountCreationScreen, setAccountCreationScreen] = useState(false); 
-    console.log(email);
+    console.log(token);
     const [password,setPassword]= useState('');
     console.log(user)
     let navigate = useNavigate(); 
@@ -92,7 +92,7 @@ const LogIn=()=>{
             const hi = signInWithEmailAndPassword(auth,email,password).then((d) => {
                 fetch("http://localhost:9000/login/userFromEmail/" + email).then((res) => res.json()).then((text) => {
                     setUser(text.id);
-                    navigate("../userprofile");
+                    navigate("../truehome");
                 })
             })
 
@@ -112,10 +112,8 @@ const LogIn=()=>{
     return (
         <nav className='Spotify'>
             <div className="header">
+            <h1 className='logotitle'>Social Song Bird</h1>
             <img className='Logo' src={Bird} ></img>
-            <div className='Title'>Social Song Bird
-            
-            </div>
             </div>
         <div className='login-form'>
             <h1>Log In</h1>

@@ -9,6 +9,7 @@ import { common } from "@mui/material/colors";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import "./DiscoverPage.css"
 
 function ForumPage(){
     const [allForums, setAllForums] = useState([]);
@@ -61,8 +62,7 @@ function ForumPage(){
     }
     return(
         <div>
-            <h1>Spotify Social</h1>
-            <Tabs centered>
+            <Tabs className="tabs" centered>
                     {/* <Tab href="/" label = "Home" /> */}
                     <Tab href="./userprofile" label = "Your Profile"/>
                     <Tab href="./discoverpage" label = "Discover"/>
@@ -72,6 +72,7 @@ function ForumPage(){
                     <Tab style={{fontWeight:'bold',textDecorationLine:'underline'}}label = "Forum"/>
                     <Tab href="./inboxpage" label = "Inbox"/>
             </Tabs>
+            <h1 className="discover">Forumns</h1>
             <Divider></Divider>
             {/* <Box display="flex" flexDirection="row">
                 <Box flexGrow={0}>
@@ -86,8 +87,7 @@ function ForumPage(){
                 </Box>
                 <h1>Forums</h1>
             </Box> */}
-            <h2>Forumns</h2>
-            <p>Browse forumns:</p>
+            <p className="miniheader">Browse forumns:</p>
             {allForums && allForums.map((item) => 
             <Card style ={postBox}key = {item.id}>
                 <Link to ='indivforumpage'state={{id:item.id,posts:item.posts,author:item.author,topic:item.topic}} style={{textDecoration:'none',color:common.black}}>
@@ -96,7 +96,7 @@ function ForumPage(){
             </Card>
             )}
             <Divider></Divider>
-            <p>Create a new forum:</p>
+            <p className="miniheader">Create a new forum:</p>
             <Card >
                 <TextField multiline label="Topic" onChange={(e) => setTempTopic(e.target.value)} ></TextField>
                 <Button onClick={()=> createNewForum(tempTopic)}>Create New Discussion</Button>
