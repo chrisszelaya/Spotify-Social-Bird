@@ -45,6 +45,7 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
             <Typography variant="h2">
                 discover
             </Typography>
+            <br></br>
             <Tabs centered>
                     {/* <Tab href="/" label = "Home" /> */}
                     <Tab label = "Your Profile" to='/userprofile' component={Link}/>
@@ -55,6 +56,7 @@ sx={{ color: '#673AB7', borderColor: '#673AB7' }}>Grade {c.name}</Button>
                     <Tab label = "Forum" to='/forumpage' component={Link}/>
                     <Tab label = "Inbox" to='/inboxpage' component={Link}/>
             </Tabs>
+            <br></br>
             <h2>Discover</h2>
             {/* Tabs to the rest of the pages */}
             {/* iterate through all the users in docs to display*/}
