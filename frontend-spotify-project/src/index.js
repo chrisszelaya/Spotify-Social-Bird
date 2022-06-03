@@ -17,18 +17,9 @@ import UserProfile from './Components/UserProfile';
 import IndivProfilePage from './Components/IndivProfilePage';
 import IndivForumnPage from './Components/IndivForumPage';
 import AccessTokenProvider from './Components/AccessTokenContext';
-import TrueHome from './Components/TrueHome';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-reportWebVitals();
-
-/*
   <AccessTokenProvider>
   <BrowserRouter>
     <Routes>
@@ -47,5 +38,7 @@ reportWebVitals();
     </Routes>
   </BrowserRouter>
   </AccessTokenProvider>
-  */
+);
+
+reportWebVitals();
 
