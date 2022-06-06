@@ -126,7 +126,6 @@ const UserProfile = (props) => {
                 <h2>Displayed Artists</h2>
                 {displayedTopArtistsIDs.map((id) => <ArtistCard key={id} id={id} token={token} myPage={true} removeArtist={removeArtistFromDisplayed}/>)}
                 <h4 style={{textAlign: "left"}}>Add a new artist to display: </h4>
-                <AddNewArtist token={token} topArtistsNotInDisplayed={topArtistsNotInDisplayed} addArtistToDisplayed={addArtistToDisplayed}/>
                 </header>
                 <Button style={{margin: 15, marginRight: 40}} variant="outlined" onClick={() => {flipPrivacy()}}>Make Page {privatePage ? "Public" : "Private"}</Button>
             </div>
@@ -293,15 +292,8 @@ class AddNewSong extends React.Component {
 }
 }
 
-class AddNewArtist extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            curArtistToDisplay: "",
-            artistArray: [],
-            runningCounter: 0,
-        }
-    }
+
+
     render() {
         if(this.state.runningCounter >= this.props.topArtistsNotInDisplayed.length) {
             let nonStateArtistArray = []; 
